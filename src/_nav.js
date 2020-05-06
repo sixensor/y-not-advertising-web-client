@@ -77,7 +77,7 @@ export default {
     //       icon: 'icon-puzzle',
     //     },
     //     {
-    //       name: 'List groups',
+    //       name: 'CampaignHistory groups',
     //       url: '/base/list-groups',
     //       icon: 'icon-puzzle',
     //     },
@@ -239,7 +239,7 @@ export default {
     //       icon: 'icon-star',
     //     },
     //     {
-    //       name: 'Register',
+    //       name: 'Redirect',
     //       url: '/register',
     //       icon: 'icon-star',
     //     },
@@ -276,28 +276,35 @@ export default {
     //   variant: 'danger',
     //   attributes: { target: '_blank', rel: "noopener" },
     // },
-
     {
-      name: 'Campaigns',
-      url: '/base',
+      title: true,
+      name: 'Campaign',
+    },
+    {
+      name: 'New Campaign',
+      url: '/campaign/create',
       icon: 'icon-puzzle',
-      children: [
-        {
-          name: 'New Campaign',
-          url: '/base/breadcrumbs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Campaigns History',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Transactions',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
-      ],
+    },
+    {
+      name: 'Campaigns History',
+      url: '/campaign/history',
+      icon: 'icon-puzzle',
+    },
+    {
+      divider: true,
+    },
+    {
+      title: true,
+      name: 'Financial',
+    },
+    {
+      name: 'Transactions',
+      url: '/base/carousels',
+      icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
     },
   ],
 };
