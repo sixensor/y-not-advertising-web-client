@@ -19,6 +19,7 @@ import adminNavigation from '../../_adminnav'
 import userNavigation from '../../_usernav'
 // routes config
 import routes from '../../routes';
+import SideBarNavItems from "./SideBarNavItems";
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
@@ -29,9 +30,10 @@ class DefaultLayout extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      role:1,
-    }
+  }
+
+
+  componentDidMount() {
   }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
@@ -55,7 +57,7 @@ class DefaultLayout extends Component {
             <AppSidebarHeader/>
             <AppSidebarForm/>
             <Suspense>
-              <AppSidebarNav navConfig={userNa} {...this.props} router={router}/>
+              <SideBarNavItems/>
             </Suspense>
             <AppSidebarFooter/>
             <AppSidebarMinimizer/>

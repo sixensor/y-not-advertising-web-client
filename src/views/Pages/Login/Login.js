@@ -56,6 +56,7 @@ class Login extends Component {
       password: this.state.password
     }).then(resp => {
       localStorage.setItem('Session', JSON.stringify(resp.data))
+      this.props.history.push('/dashboard')
     });
   }
 

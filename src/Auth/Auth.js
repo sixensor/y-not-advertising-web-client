@@ -13,21 +13,21 @@ class Auth extends Component {
   }
 
   componentDidMount() {
-    // let session = localStorage.getItem('Session')
-    // if (!session) {
-    //   this.props.history.push('/login')
-    //   console.log(session)
-    // }
+    let session = localStorage.getItem('Session')
+    if (!session) {
+      this.props.history.push('/login')
+      console.log(session)
+    }
   }
 
   render() {
-    // if (this.state.user === undefined) {
-    //   return (
-    //     <section>
-    //       <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>}/>
-    //     </section>
-    //   )
-    // }
+    if (this.state.session === undefined) {
+      return (
+        <section>
+          <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>}/>
+        </section>
+      )
+    }
     return (
       <section>{this.props.children}</section>
     )
