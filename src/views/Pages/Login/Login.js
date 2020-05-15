@@ -1,8 +1,65 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardGroup,
+  Col,
+  Container,
+  Form,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Row
+} from 'reactstrap';
+import axios from 'axios'
+
 
 class Login extends Component {
+
+
+  constructor(props) {
+    super(props);
+
+    /**
+     * Initialize the status.
+     * @type {{password: string, email: string}}
+     */
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  /**
+   * Set status parameters on change
+   * @param e
+   */
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+
+  /**
+   * Submit login form
+   * @param e
+   */
+  onSubmitLoginForm(e) {
+    const loginUrl = "http://167.99.174.148:8001/api/v1.0/login";
+    e.preventDefault();
+    axios.post(loginUrl, {
+      email: this.state.email,
+      password: this.state.password
+    }).then(resp => {
+      localStorage.setItem('Session', JSON.stringify(resp.data))
+    });
+  }
+
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -12,7 +69,7 @@ class Login extends Component {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <Form>
+                    <Form onSubmit={e => this.onSubmitLoginForm(e)}>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
                       <InputGroup className="mb-3">
@@ -21,7 +78,8 @@ class Login extends Component {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" />
+                        <Input onChange={e => this.onChange(e)} value={this.state.email} name="email" type="email"
+                               placeholder="Email" autoComplete="email"/>
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -29,7 +87,8 @@ class Login extends Component {
                             <i className="icon-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="current-password" />
+                        <Input onChange={e => this.onChange(e)} value={this.state.password} name="password"
+                               type="password" placeholder="Password" autoComplete="current-password"/>
                       </InputGroup>
                       <Row>
                         <Col xs="6">
@@ -42,12 +101,11 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                      <h2>Register</h2>
+                      <p></p>
                       <Link to="/register">
                         <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
                       </Link>

@@ -40,20 +40,22 @@ const User = React.lazy(() => import('./views/Users/User'));
 const CreateCampaign = React.lazy(() => import('./views/Campaign/CreateCampaign'));
 const CampaignHistory = React.lazy(() => import('./views/Campaign/CampaignHistory'));
 
+
+
 const routes = [
 
-
+  // Role parameters added
   {path: '/', exact: true, name: 'Home'},
 
   // Custom routes
-  {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign},
-  {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory},
-  {path: '/dashboard', name: 'Dashboard', component: CreateCampaign},
+  {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign, role: 2},
+  {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory, role: 1},
+  {path: '/dashboard', name: 'Dashboard', component: CreateCampaign, role: 1},
 
   // {path: '/dashboard', name: 'Dashboard', component: Dashboard},
   // {path: '/theme', exact: true, name: 'Theme', component: Colors},
   // {path: '/theme/colors', name: 'Colors', component: Colors},
-  {path: '/theme/typography', name: 'Typography', component: Typography},
+  {path: '/theme/typography', name: 'Typography', component: Typography, role: 1},
   // {path: '/base', exact: true, name: 'Base', component: Cards},
   // {path: '/base/cards', name: 'Cards', component: Cards},
   // {path: '/base/forms', name: 'Forms', component: Forms},
