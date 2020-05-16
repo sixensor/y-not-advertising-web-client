@@ -10,20 +10,21 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Row
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row,
 } from 'reactstrap';
-import Label from "reactstrap/es/Label";
+import axios from "axios";
+
 
 class Register extends Component {
 
-  /**
-   * Initialize the status of the application
-   * @param props
-   */
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      first_name: '',
+      last_name: '',
       phone: '',
       email: '',
       password: '',
@@ -32,18 +33,54 @@ class Register extends Component {
       address_line_two: '',
       city: '',
       country: '',
+      err_status: false,
+      err_message: '',
     }
   }
 
-  /**
-   * Set status parameters on change
-   * @param e
-   */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
     console.log(JSON.stringify(this.state))
+  }
+
+  onSubmitRegisterForm(e) {
+    const loginUrl = "http://167.99.174.148:8001/api/v1.0/register";
+    e.preventDefault();
+    axios.post(loginUrl, {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      phone: this.state.phone,
+      email: this.state.email,
+      password: this.state.password,
+      image: this.state.image,
+      address_line_one: this.state.address_line_one,
+      address_line_two: this.state.address_line_two,
+      city: this.state.city,
+      country: this.state.country,
+    }).then(resp => {
+      this.props.history.push('/login')
+    }).catch(err => {
+      let message = '';
+      if (err.response.data.code === 205) {
+        message = 'Your `E-mail` or `Phone Number` already registered in Y-NOT Advertising.'
+      }
+      this.setState({
+        err_status: true,
+        err_message: message,
+      })
+    });
+  }
+
+  redirectLogin(e) {
+    this.props.history.push('/login')
+  }
+
+  closeErrorPopup(e) {
+    this.setState({
+      err_status: false,
+    })
   }
 
   render() {
@@ -54,9 +91,19 @@ class Register extends Component {
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">
                 <CardBody className="p-4">
-                  <Form>
+                  <Form onSubmit={e => this.onSubmitRegisterForm(e)}>
                     <h1>Register</h1>
                     <p className="text-muted">Create your account</p>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="icon-user"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" onChange={e => this.onChange(e)} value={this.state.first_name}
+                             name="first_name"
+                             placeholder="First name" autoComplete="first_name" required/>
+                    </InputGroup>
 
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -64,8 +111,8 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" onChange={e => this.onChange(e)} value={this.state.name} name="name"
-                             placeholder="Full name" autoComplete="username"/>
+                      <Input type="text" onChange={e => this.onChange(e)} value={this.state.last_name} name="last_name"
+                             placeholder="Last name" autoComplete="last_name" required/>
                     </InputGroup>
 
                     <InputGroup className="mb-3">
@@ -75,7 +122,7 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" onChange={e => this.onChange(e)} value={this.state.phone} name="phone"
-                             placeholder="Phone number" autoComplete="phone"/>
+                             placeholder="Phone number" autoComplete="phone" required/>
                     </InputGroup>
 
                     <InputGroup className="mb-3">
@@ -85,7 +132,7 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" onChange={e => this.onChange(e)} value={this.state.email} name="email"
-                             placeholder="E-mail" autoComplete="email"/>
+                             placeholder="E-mail" autoComplete="email" required/>
                     </InputGroup>
 
                     <InputGroup className="mb-3">
@@ -96,7 +143,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="text" onChange={e => this.onChange(e)} value={this.state.address_line_one}
                              name="address_line_one"
-                             placeholder="Address line 1" autoComplete="address"/>
+                             placeholder="Address line 1" autoComplete="address" required/>
                     </InputGroup>
 
 
@@ -119,7 +166,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="text" onChange={e => this.onChange(e)} value={this.state.city}
                              name="city"
-                             placeholder="City" autoComplete="city"/>
+                             placeholder="City" autoComplete="city" required/>
                     </InputGroup>
 
                     <InputGroup className="mb-3">
@@ -133,10 +180,10 @@ class Register extends Component {
                              placeholder="Country" autoComplete="country"/>
                     </InputGroup>
 
-                    <InputGroup className="mb-3">
-                      <Label for="profileImage">Profile Image</Label>
-                      <Input type="file" name="file"  onChange={e => this.onChange(e)} name="image"/>
-                    </InputGroup>
+                    {/*<InputGroup className="mb-3">*/}
+                    {/*  <Label for="profileImage">Profile Image</Label>*/}
+                    {/*  <Input type="file" name="file" onChange={e => this.uploadProfileImage(e)} name="image"/>*/}
+                    {/*</InputGroup>*/}
 
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -144,7 +191,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password"/>
+                      <Input type="password" name="password" placeholder="Password" onChange={e => this.onChange(e)} value={this.state.password}  required/>
                     </InputGroup>
 
                     <InputGroup className="mb-4">
@@ -153,25 +200,24 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password"/>
+                      <Input type="password" placeholder="Repeat password"  required/>
                     </InputGroup>
                     <Button color="danger" block>Create Account</Button>
                   </Form>
                 </CardBody>
-                {/*<CardFooter className="p-4">*/}
-                {/*  <Row>*/}
-                {/*    <Col xs="12" sm="6">*/}
-                {/*      <Button className="btn-facebook mb-1" block><span>facebook</span></Button>*/}
-                {/*    </Col>*/}
-                {/*    <Col xs="12" sm="6">*/}
-                {/*      <Button className="btn-twitter mb-1" block><span>twitter</span></Button>*/}
-                {/*    </Col>*/}
-                {/*  </Row>*/}
-                {/*</CardFooter>*/}
               </Card>
             </Col>
           </Row>
         </Container>
+        <Modal isOpen={this.state.err_status}>
+          <ModalBody>
+            <p>{this.state.err_message}</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={e => this.redirectLogin(e)}>Login</Button>
+            <Button color="danger" onClick={e => this.closeErrorPopup(e)}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }

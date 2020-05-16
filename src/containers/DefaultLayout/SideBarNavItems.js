@@ -14,6 +14,7 @@ class SideBarNavItems extends Component {
   }
   componentDidMount() {
     let session = JSON.parse(localStorage.getItem('Session'))
+    console.log(session)
     if (!session) {
       this.props.history.push('/login')
     }

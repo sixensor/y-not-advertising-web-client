@@ -12,11 +12,8 @@ import {
   AppSidebarForm,
   AppSidebarHeader,
   AppSidebarMinimizer,
-  AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import adminNavigation from '../../_adminnav'
-import userNavigation from '../../_usernav'
 // routes config
 import routes from '../../routes';
 import SideBarNavItems from "./SideBarNavItems";
@@ -31,7 +28,6 @@ class DefaultLayout extends Component {
   constructor(props) {
     super(props);
   }
-
 
   componentDidMount() {
   }
@@ -68,12 +64,6 @@ class DefaultLayout extends Component {
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
-                    // let session = JSON.parse(localStorage.getItem('Session'))
-                    // console.log(session.user.role)
-                    // console.log(route.role)
-                    // if (session.user.role !== route.role) {
-                    //   return (null);
-                    // }
                     return route.component ? (
                       <Route
                         key={idx}
@@ -90,11 +80,6 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          {/*<AppAside fixed>*/}
-          {/*  <Suspense fallback={this.loading()}>*/}
-          {/*    <DefaultAside/>*/}
-          {/*  </Suspense>*/}
-          {/*</AppAside>*/}
         </div>
         <AppFooter>
           <Suspense fallback={this.loading()}>
