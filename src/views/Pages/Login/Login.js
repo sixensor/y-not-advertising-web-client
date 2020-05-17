@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {
+  Badge,
   Button,
   Card,
   CardBody,
@@ -12,42 +12,28 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Row
+  Row,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
-
-
 class Login extends Component {
-
 
   constructor(props) {
     super(props);
-
-    /**
-     * Initialize the status.
-     * @type {{password: string, email: string}}
-     */
     this.state = {
       email: '',
       password: '',
+      err_status: false,
+      err_message: '',
     };
   }
 
-  /**
-   * Set status parameters on change
-   * @param e
-   */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-
-  /**
-   * Submit login form
-   * @param e
-   */
   onSubmitLoginForm(e) {
     const loginUrl = "http://167.99.174.148:8001/api/v1.0/login";
     e.preventDefault();
@@ -57,9 +43,18 @@ class Login extends Component {
     }).then(resp => {
       localStorage.setItem('Session', JSON.stringify(resp.data))
       this.props.history.push('/dashboard')
-    });
+    }).catch(err => {
+      console.log(err.response.data)
+      let message = '';
+      if (err.response.data.code === 100) {
+        message = 'Invalid credentials.'
+      }
+      this.setState({
+        err_status: true,
+        err_message: message,
+      })
+    })
   }
-
 
   render() {
     return (
@@ -91,28 +86,34 @@ class Login extends Component {
                         <Input onChange={e => this.onChange(e)} value={this.state.password} name="password"
                                type="password" placeholder="Password" autoComplete="current-password"/>
                       </InputGroup>
+                      <InputGroup className="mb-4">
+                        <Badge hidden={!this.state.err_status} color="danger">{this.state.err_message}</Badge>
+                      </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button color="primary" className="px-4">Login</Button>
+                          <Button color="primary" className="px-4  float-left">Login</Button>
                         </Col>
-                        <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
+                        <Col xs="6">
+                          <Link to="/register">
+                            <Button color="link" className="mt-3 float-right" active tabIndex={-1}>Register
+                              Now!</Button>
+                          </Link>
                         </Col>
                       </Row>
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Register</h2>
-                      <p></p>
-                      <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
-                      </Link>
-                    </div>
-                  </CardBody>
-                </Card>
+                {/*<Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>*/}
+                {/*  <CardBody className="text-center">*/}
+                {/*    <div>*/}
+                {/*      <h2>Register</h2>*/}
+                {/*      <p></p>*/}
+                {/*      <Link to="/register">*/}
+                {/*        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>*/}
+                {/*      </Link>*/}
+                {/*    </div>*/}
+                {/*  </CardBody>*/}
+                {/*</Card>*/}
               </CardGroup>
             </Col>
           </Row>

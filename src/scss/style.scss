@@ -12,3 +12,32 @@
 
 // ie fixes
 @import "ie-fix";
+
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+body {
+//     font-family: 'Open Sans', sans-serif;
+font-family: 'Nunito Sans', sans-serif;
+font-size:16px;
+}
+
+h1,h2,h3,h4 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nav-title {
+  font-family: 'Montserrat', sans-serif;
+}
+.dropdown-header{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-header{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dashboard-bottom{
+font-size:11px;
+}

@@ -39,7 +39,7 @@ const User = React.lazy(() => import('./views/Users/User'));
 // Application Routes
 const CreateCampaign = React.lazy(() => import('./views/Campaign/CreateCampaign'));
 const CampaignHistory = React.lazy(() => import('./views/Campaign/CampaignHistory'));
-
+const Profile = React.lazy(() => import('./views/Profile/Profile'));
 
 
 const routes = [
@@ -48,17 +48,18 @@ const routes = [
   {path: '/', exact: true, name: 'Home'},
 
   // Custom routes
-  {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign, role: 2},
-  {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory, role: 1},
-  {path: '/dashboard', name: 'Dashboard', component: CreateCampaign, role: 1},
+  {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign},
+  {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory},
+  {path: '/dashboard', name: 'Dashboard', component: CreateCampaign},
+  {path: '/profile', name: 'Profile', component: Profile},
 
   // {path: '/dashboard', name: 'Dashboard', component: Dashboard},
   // {path: '/theme', exact: true, name: 'Theme', component: Colors},
   // {path: '/theme/colors', name: 'Colors', component: Colors},
-  {path: '/theme/typography', name: 'Typography', component: Typography, role: 1},
+  {path: '/theme/typography', name: 'Typography', component: Typography},
   // {path: '/base', exact: true, name: 'Base', component: Cards},
   // {path: '/base/cards', name: 'Cards', component: Cards},
-  // {path: '/base/forms', name: 'Forms', component: Forms},
+  {path: '/base/forms', name: 'Forms', component: Forms},
   // {path: '/base/switches', name: 'Switches', component: Switches},
   // {path: '/base/tables', name: 'Tables', component: Tables},
   // {path: '/base/tabs', name: 'Tabs', component: Tabs},
