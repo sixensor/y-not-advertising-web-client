@@ -16,6 +16,7 @@ import {
   Row,
 } from 'reactstrap';
 import axios from "axios";
+import ModalHeader from "reactstrap/es/ModalHeader";
 
 
 class Register extends Component {
@@ -210,12 +211,15 @@ class Register extends Component {
           </Row>
         </Container>
         <Modal isOpen={this.state.err_status}>
+          <ModalHeader>
+            Oops..Unable To Register!
+          </ModalHeader>
           <ModalBody>
             <p>{this.state.err_message}</p>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={e => this.redirectLogin(e)}>Login</Button>
-            <Button color="danger" onClick={e => this.closeErrorPopup(e)}>Cancel</Button>
+            <Button color="danger" onClick={e => this.closeErrorPopup(e)}>Close</Button>
           </ModalFooter>
         </Modal>
       </div>

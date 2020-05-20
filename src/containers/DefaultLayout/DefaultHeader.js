@@ -28,8 +28,10 @@ class DefaultHeader extends Component {
     if (!session) {
       this.props.push("/login");
     }
-
-    let imageUrl = '';
+    let imageUrl = "http://167.99.174.148:8003/file?name=" + session.user.profile_image;
+    if (session.user.profile_image === '') {
+      imageUrl = "http://167.99.174.148:8003/file?name=default_profile_pic.png";
+    }
     this.setState(
       {
         image_url: imageUrl,
@@ -83,7 +85,7 @@ class DefaultHeader extends Component {
           {/*</NavItem>*/}
           <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
-              <img src="http://167.99.174.148:8003/file?name=default_profile_pic.png" className="img-avatar"
+              <img src={this.state.image_url} className="img-avatar"
                    alt="profile image"/>
             </DropdownToggle>
             <DropdownMenu right>

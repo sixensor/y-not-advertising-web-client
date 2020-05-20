@@ -1,145 +1,257 @@
 import React, {Component} from 'react';
 import {
-  Badge,
+  Button,
   Card,
   CardBody,
   CardHeader,
   Col,
-  FormGroup, Input, Label,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  TabContent,
-  TabPane
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row
 } from 'reactstrap';
-import classnames from 'classnames';
+import axios from "axios";
+import ModalHeader from "reactstrap/es/ModalHeader";
+import Badge from "reactstrap/es/Badge";
 
 class Profile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      id: 1,
+      first_name: '',
+      last_name: '',
+      phone: '',
+      email: '',
+      is_registered: 0,
+      is_activated: 0,
+      is_verified: 0,
+      profile_image: '',
+      role: 1,
+      address_line_one: '',
+      address_line_two: '',
+      city: '',
+      country: '',
+      is_error_popup: false,
+      pn_verify_popup: false,
     };
+  }
+
+
+  componentDidMount() {
+    let session = JSON.parse(localStorage.getItem('Session'));
+    if (!session) {
+      this.props.history.push('/login');
+    }
+    console.log(session);
+    let getUserUrl = "http://167.99.174.148:8001/api/v1.0/user/profile";
+    // get user details call
+    axios.get(getUserUrl,
+      {
+        headers: {
+          Authorization: 'Bearer ' + session.token,
+        }
+      }).then(resp => {
+      this.setState({
+        first_name: resp.data.first_name,
+        last_name: resp.data.last_name,
+        phone: resp.data.phone,
+        email: resp.data.email,
+        is_registered: resp.data.is_registered,
+        is_activated: resp.data.is_activated,
+        is_verified: resp.data.is_verified,
+        profile_image: resp.data.profile_image,
+        role: resp.data.role,
+        address_line_one: resp.data.address_line_one,
+        address_line_two: resp.data.address_line_two,
+        city: resp.data.city,
+        country: resp.data.country,
+      })
+    }).catch(err => {
+      this.setState({
+        is_error_popup: true,
+      })
+    });
+  }
+
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    console.log(JSON.stringify(this.state))
+  }
+
+  closeErrorPopup(e) {
+    this.setState({
+      is_error_popup: false,
+    })
+  }
+
+
+  openPhoneNumberVerifyPopup(){
+    this.setState({
+      pn_verify_popup: false,
+    })
+  }
+
+  closePhoneNumberVerifyPopup(e) {
+    this.setState({
+      pn_verify_popup: false,
+    })
+  }
+
+  activationVisibility() {
+    if (this.state.is_activated === 1) {
+      return (
+        <Badge color="success">Verified</Badge>
+      )
+    } else {
+      return (
+        <Badge onClick={e=>this.openPhoneNumberVerifyPopup(e)} color="danger">Click here to verify your phone
+          number</Badge>
+      )
+    }
   }
 
   render() {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" sm="6">
+          <Col lg="2"/>
+          <Col xs="12" md="12" lg="8">
             <Card>
               <CardHeader>
-                <strong>Credit Card</strong>
+                <strong>Your Profile</strong>
                 <small> Form</small>
               </CardHeader>
               <CardBody>
-                <Row>
-                  <Col xs="12">
-                    <FormGroup>
-                      <Label htmlFor="name">Name</Label>
-                      <Input type="text" id="name" placeholder="Enter your name" required />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs="12">
-                    <FormGroup>
-                      <Label htmlFor="ccnumber">Credit Card Number</Label>
-                      <Input type="text" id="ccnumber" placeholder="0000 0000 0000 0000" required />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs="4">
-                    <FormGroup>
-                      <Label htmlFor="ccmonth">Month</Label>
-                      <Input type="select" name="ccmonth" id="ccmonth">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col xs="4">
-                    <FormGroup>
-                      <Label htmlFor="ccyear">Year</Label>
-                      <Input type="select" name="ccyear" id="ccyear">
-                        <option>2017</option>
-                        <option>2018</option>
-                        <option>2019</option>
-                        <option>2020</option>
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
-                        <option>2024</option>
-                        <option>2025</option>
-                        <option>2026</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col xs="4">
-                    <FormGroup>
-                      <Label htmlFor="cvv">CVV/CVC</Label>
-                      <Input type="text" id="cvv" placeholder="123" required />
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col xs="12" sm="6">
-            <Card>
-              <CardHeader>
-                <strong>Company</strong>
-                <small> Form</small>
-              </CardHeader>
-              <CardBody>
-                <FormGroup>
-                  <Label htmlFor="company">Company</Label>
-                  <Input type="text" id="company" placeholder="Enter your company name" />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="vat">VAT</Label>
-                  <Input type="text" id="vat" placeholder="DE1234567890" />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="street">Street</Label>
-                  <Input type="text" id="street" placeholder="Enter street name" />
-                </FormGroup>
-                <FormGroup row className="my-0">
-                  <Col xs="8">
-                    <FormGroup>
-                      <Label htmlFor="city">City</Label>
-                      <Input type="text" id="city" placeholder="Enter your city" />
-                    </FormGroup>
-                  </Col>
-                  <Col xs="4">
-                    <FormGroup>
-                      <Label htmlFor="postal-code">Postal Code</Label>
-                      <Input type="text" id="postal-code" placeholder="Postal Code" />
-                    </FormGroup>
-                  </Col>
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="country">Country</Label>
-                  <Input type="text" id="country" placeholder="Country name" />
-                </FormGroup>
+                <Form onSubmit={e => this.onSubmitRegisterForm(e)}>
+                  {/*Names */}
+                  <Row>
+                    <Col xs="6">
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="firstName">First Name</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.first_name}
+                               id="firstName"
+                               name="first_name"
+                               placeholder="First name" autoComplete="first_name" required/>
+                      </FormGroup>
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="lastName">Last Name</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.last_name}
+                               id="lastName"
+                               name="last_name"
+                               placeholder="Last Name" autoComplete="last_name" required/>
+                      </FormGroup>
+                      <FormGroup className="mb-12">
+                      </FormGroup>
+                    </Col>
+                    <Col xs="6">
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="12">
+                      <FormGroup className="mb-3">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.phone}
+                               id="phone"
+                               name="phone"
+                               placeholder="Phone number" autoComplete="phone" disabled/>
+                        {this.activationVisibility()}
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="12">
+                      <FormGroup className="mb-3">
+                        <Label htmlFor="email">E-mail</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.email}
+                               id="email"
+                               name="email"
+                               placeholder="E-mail" autoComplete="email" disabled/>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="6">
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="addressLineOne">Address Line 1</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.address_line_one}
+                               id="addressLineOne"
+                               name="address_line_one"
+                               placeholder="Address line 1" autoComplete="address" required/>
+                      </FormGroup>
+                    </Col>
+                    <Col xs="6">
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="addressLineTwo">Address Line 2</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.address_line_two}
+                               id="addressLineTwo"
+                               name="address_line_two"
+                               placeholder="Address line 2" autoComplete="address"/>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="6">
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="city">City</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.city}
+                               id="city"
+                               name="city"
+                               placeholder="City" autoComplete="city" required/>
+                      </FormGroup>
+                    </Col>
+                    <Col xs="6">
+                      <FormGroup className="mb-12">
+                        <Label htmlFor="country">Country</Label>
+                        <Input type="text" onChange={e => this.onChange(e)} value={this.state.country}
+                               id="country"
+                               name="country"
+                               placeholder="Country" autoComplete="country"/>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Button color="primary">Save</Button>
+                </Form>
               </CardBody>
             </Card>
           </Col>
         </Row>
+        <Modal isOpen={this.state.is_error_popup} centered>
+          <ModalHeader>
+            <h4>Error</h4>
+          </ModalHeader>
+          <ModalBody>
+            <p>Unavoidable error! Please refresh the page or retry !</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={e => this.closeErrorPopup(e)}>Close</Button>
+          </ModalFooter>
+        </Modal>
+
+
+        <Modal isOpen={this.state.pn_verify_popup} centered>
+          <ModalHeader>
+            <h4>Verify Your Phone Number </h4>
+          </ModalHeader>
+          <ModalBody>
+
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={e => this.closePhoneNumberVerifyPopup(e)}>Close</Button>
+          </ModalFooter>
+        </Modal>
+
       </div>
     );
   }
 }
+
 export default Profile;

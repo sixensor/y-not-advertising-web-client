@@ -36,13 +36,12 @@ class DefaultLayout extends Component {
 
   signOut(e) {
     e.preventDefault()
-    localStorage.clear();
+   localStorage.clear();
     this.props.history.push('/login')
   }
 
   profile(e) {
     e.preventDefault()
-    localStorage.clear();
     this.props.history.push('/profile')
   }
 
