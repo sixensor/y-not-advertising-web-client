@@ -19,7 +19,7 @@ class CreateCampaign extends Component {
       input_format: '',
       csv_file_name: '',
       numbers: '',
-      caller_ids: '',
+      caller_ids: undefined,
     }
   }
 
@@ -37,8 +37,9 @@ class CreateCampaign extends Component {
           Authorization: 'Bearer ' + session.token,
         }
       }).then(resp => {
+      let callerIds = resp.data.map(x => x);
       this.setState({
-        caller_ids: resp.data
+        caller_ids: callerIds,
       });
     }).catch(err => {
       console.log(err)
@@ -72,8 +73,8 @@ class CreateCampaign extends Component {
 
     let caller_ids_elements;
     if (this.state.caller_ids !== undefined && this.state.caller_ids !== null) {
-      caller_ids_elements = this.state.caller_ids.map((item) =>
-        <option value={item.id}>{item.name}</option>
+      caller_ids_elements = this.state.caller_ids.map(item =>
+        <option value={item.id}>{item.code}</option>
       );
     }
 
@@ -97,8 +98,7 @@ class CreateCampaign extends Component {
                            id="caller_id_id"
                            onChange={e => this.onChange(e)} value={this.state.caller_id_id}
                     >
-                      <option value='1'>Y-Not Advertising</option>
-                      <option value='2'>Provincial Campaign</option>
+                      {caller_ids_elements}
                     </Input>
                   </FormGroup>
 
