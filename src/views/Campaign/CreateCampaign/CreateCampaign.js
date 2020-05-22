@@ -19,6 +19,7 @@ class CreateCampaign extends Component {
       input_format: '',
       csv_file_name: '',
       numbers: '',
+      caller_ids: '',
     }
   }
 
@@ -36,7 +37,9 @@ class CreateCampaign extends Component {
           Authorization: 'Bearer ' + session.token,
         }
       }).then(resp => {
-      console.log(resp.data)
+      this.setState({
+        caller_ids: resp.data
+      });
     }).catch(err => {
       console.log(err)
     });
@@ -65,6 +68,15 @@ class CreateCampaign extends Component {
   }
 
   render() {
+
+
+    let caller_ids_elements;
+    if (this.state.caller_ids !== undefined && this.state.caller_ids !== null) {
+      caller_ids_elements = this.state.caller_ids.map((item) =>
+        <option value={item.id}>{item.name}</option>
+      );
+    }
+
     return (
       <div className="animated fadeIn">
         <Row>
