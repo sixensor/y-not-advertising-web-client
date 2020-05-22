@@ -3,19 +3,66 @@ import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, 
 import FormText from "reactstrap/es/FormText";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 
 class CreateCampaign extends Component {
 
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      caller_id_id: '1',
+      message_content: '',
+      is_scheduled: false,
+      scheduled_date: '',
+      input_format: '',
+      csv_file_name: '',
+      numbers: '',
+    }
+  }
+
+  componentDidMount() {
+    // get session here
+    let session = JSON.parse(localStorage.getItem('Session'));
+    if (!session) {
+      this.props.history.push('/login');
+    }
+    // caller id must call here
+    const userCallerIdUrl = "http://167.99.174.148:8001/api/v1.0/user/caller-ids";
+    axios.get(userCallerIdUrl,
+      {
+        headers: {
+          Authorization: 'Bearer ' + session.token,
+        }
+      }).then(resp => {
+      console.log(resp.data)
+    }).catch(err => {
+      console.log(err)
+    });
+  }
+
   state = {
     startDate: new Date()
   };
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
   handleChange = date => {
     this.setState({
       startDate: date
     });
   };
+
+
+  createCampaignSubmit(e) {
+    e.preventDefault();
+    console.log(this.state)
+  }
 
   render() {
     return (
@@ -29,13 +76,17 @@ class CreateCampaign extends Component {
                 <i className="fa fa-align-justify"></i><strong>Create Campaign</strong>
               </CardHeader>
               <CardBody>
-                <Form>
+                <Form onSubmit={e => this.createCampaignSubmit(e)}>
                   {/*Caller ids*/}
                   <FormGroup>
                     <Label for="exampleSelect">Select Caller ID</Label>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option>Y-Not Advertising</option>
-                      <option>Provincial Campaign</option>
+                    <Input type="select"
+                           name="caller_id_id"
+                           id="caller_id_id"
+                           onChange={e => this.onChange(e)} value={this.state.caller_id_id}
+                    >
+                      <option value='1'>Y-Not Advertising</option>
+                      <option value='2'>Provincial Campaign</option>
                     </Input>
                   </FormGroup>
 

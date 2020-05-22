@@ -48,7 +48,6 @@ class Profile extends Component {
     if (!session) {
       this.props.history.push('/login');
     }
-    console.log(session);
     let getUserUrl = "http://167.99.174.148:8001/api/v1.0/user/profile";
     // get user details call
     axios.get(getUserUrl,
