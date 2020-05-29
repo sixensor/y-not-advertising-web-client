@@ -17,10 +17,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap');
+
+@import url('../')
+
 body {
 //     font-family: 'Open Sans', sans-serif;
-font-family: 'Nunito Sans', sans-serif;
-font-size:16px;
+font-family: 'Open Sans', sans-serif;
+font-size:14px;
 }
 
 h1,h2,h3,h4 {
@@ -40,4 +44,8 @@ h1,h2,h3,h4 {
 
 .dashboard-bottom{
 font-size:11px;
+}
+
+label{
+font-family: 'Montserrat', sans-serif;
 }

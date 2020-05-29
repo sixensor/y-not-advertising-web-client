@@ -36,20 +36,23 @@ const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 
+
 // Application Routes
 const CreateCampaign = React.lazy(() => import('./views/Campaign/CreateCampaign'));
 const CampaignHistory = React.lazy(() => import('./views/Campaign/CampaignHistory'));
+const PayForCampaign = React.lazy(() => import('./views/Campaign/CampaignPayment'));
 const Profile = React.lazy(() => import('./views/Profile/Profile'));
 
 
 const routes = [
 
   // Role parameters added
-  {path: '/', exact: true, name: 'Home'},
+  // {path: '/', exact: true, name: 'Home'},
 
   // Custom routes
   {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign},
   {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory},
+  {path: '/campaign/pay', name: 'Pay for Campaign', component: PayForCampaign},
   {path: '/dashboard', name: 'Dashboard', component: CreateCampaign},
   {path: '/profile', name: 'Profile', component: Profile},
 

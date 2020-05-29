@@ -39,21 +39,32 @@ class Profile extends Component {
       country: '',
       is_error_popup: false,
       pn_verify_popup: false,
+      pn_verification_code: '',
+      pn_verification_msg: '',
+      pn_verification_err: '',
+      is_enable_req_btn: true,
     };
   }
 
 
-  componentDidMount() {
+  // Get current session bearer token
+  getBearerToken() {
     let session = JSON.parse(localStorage.getItem('Session'));
     if (!session) {
       this.props.history.push('/login');
     }
+    return 'Bearer ' + session.token
+  }
+
+
+  // Initialize the components
+  componentDidMount() {
     let getUserUrl = "http://167.99.174.148:8001/api/v1.0/user/profile";
     // get user details call
     axios.get(getUserUrl,
       {
         headers: {
-          Authorization: 'Bearer ' + session.token,
+          Authorization: this.getBearerToken(),
         }
       }).then(resp => {
       this.setState({
@@ -92,10 +103,9 @@ class Profile extends Component {
     })
   }
 
-
-  openPhoneNumberVerifyPopup(){
+  openPhoneNumberVerifyPopup() {
     this.setState({
-      pn_verify_popup: false,
+      pn_verify_popup: true,
     })
   }
 
@@ -105,14 +115,77 @@ class Profile extends Component {
     })
   }
 
+  // Verify the user account using verification code
+  verifyAccount(e) {
+    let verifyAccountUrl = 'http://167.99.174.148:8001/api/v1.0/user/profile/verify'
+    axios.post(verifyAccountUrl, {
+        code: this.state.pn_verification_code,
+      },
+      {
+        headers: {
+          Authorization: this.getBearerToken(),
+        }
+      }).then(resp => {
+      this.componentDidMount();
+      this.closePhoneNumberVerifyPopup(e)
+
+    }).catch(err => {
+      console.log(err.response.message)
+      this.setState({
+        pn_verification_msg: '',
+        pn_verification_err: err.response.data.message,
+      })
+    });
+  }
+
+  // Verification code request by the user
+  // To verify the code
+  verificationCodeRequest() {
+    // Enable the verification code request button
+    this.setState({
+      is_enable_req_btn: false,
+    })
+    // verification code request HTTP request
+    let verificationCodeRequestUrl = "http://167.99.174.148:8001/api/v1.0/user/profile/verification-request";
+    axios.post(verificationCodeRequestUrl, null,
+      {
+        headers: {
+          Authorization: this.getBearerToken(),
+        }
+      }).then(resp => {
+      this.setState({
+        pn_verification_err:'',
+        pn_verification_msg: resp.data.message,
+      })
+    }).catch(err => {
+      console.log(err.response)
+    });
+
+    // Enable the verification code request button
+    this.setState({
+      is_enable_req_btn: true,
+    })
+  }
+
+  // Verification code request button
+  verificationCodeRequestBtn() {
+    if (this.state.is_enable_req_btn) {
+      return (<Button color="primary" onClick={e => this.verificationCodeRequest(e)}>Request New Code</Button>);
+    } else {
+      return (
+        <Button color="primary" onClick={e => this.verificationCodeRequest(e)} disabled>Request New Code</Button>);
+    }
+  }
+
+
   activationVisibility() {
-    if (this.state.is_activated === 1) {
+    if (this.state.is_verified === 1) {
       return (
         <Badge color="success">Verified</Badge>
       )
     } else {
       return (
-        <Badge onClick={e=>this.openPhoneNumberVerifyPopup(e)} color="danger">Click here to verify your phone
+        <Badge onClick={e => this.openPhoneNumberVerifyPopup(e)} color="danger">Click here to verify your phone
           number</Badge>
       )
     }
@@ -205,7 +278,8 @@ class Profile extends Component {
                                id="city"
                                name="city"
                                placeholder="City" autoComplete="city" required/>
-                      </FormGroup>
+                      </FormGroup> super(props);
+
                     </Col>
                     <Col xs="6">
                       <FormGroup className="mb-12">
@@ -217,12 +291,13 @@ class Profile extends Component {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Button color="primary">Save</Button>
+                  <Input type="submit" color="primary" value="Save"/>
                 </Form>
               </CardBody>
             </Card>
           </Col>
         </Row>
+
         <Modal isOpen={this.state.is_error_popup} centered>
           <ModalHeader>
             <h4>Error</h4>
@@ -241,10 +316,22 @@ class Profile extends Component {
             <h4>Verify Your Phone Number </h4>
           </ModalHeader>
           <ModalBody>
-
+            <Form>
+              <FormGroup className="mb-12">
+                <Label htmlFor="pn_verification_code">Enter your code</Label>
+                <Input type="text" onChange={e => this.onChange(e)} value={this.state.pn_verification_code}
+                       id="pn_verification_code"
+                       name="pn_verification_code"
+                       placeholder="XXXX"/>
+              </FormGroup>
+              <Badge color="success">{this.state.pn_verification_msg}</Badge>
+              <Badge color="danger">{this.state.pn_verification_err}</Badge>
+            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={e => this.closePhoneNumberVerifyPopup(e)}>Close</Button>
+            <Button color="primary" onClick={e => this.verifyAccount(e)}>Verify</Button>
+            {this.verificationCodeRequestBtn()}
+            <Button color="default" onClick={e => this.closePhoneNumberVerifyPopup(e)}>Close</Button>
           </ModalFooter>
         </Modal>
 

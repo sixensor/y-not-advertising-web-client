@@ -15,7 +15,7 @@ class Auth extends Component {
   componentDidMount() {
     let session = localStorage.getItem('Session')
     if (!session) {
-      this.props.history.push('/login')
+      this.props.history.push('/home')
     }
   }
 

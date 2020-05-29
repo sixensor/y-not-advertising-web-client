@@ -38,6 +38,7 @@
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.4.1",
+    "redux": "^4.0.5",
     "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
