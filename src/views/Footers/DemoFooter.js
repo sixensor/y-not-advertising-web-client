@@ -18,9 +18,10 @@
 */
 /*eslint-disable*/
 import React from "react";
-
 // reactstrap components
-import { Row, Container } from "reactstrap";
+import {Container, Row} from "reactstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function DemoFooter() {
   return (
@@ -42,7 +43,7 @@ function DemoFooter() {
           <div className="credits ml-auto">
             <span className="copyright">
               © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Sixensor
+              <FontAwesomeIcon icon={faHeart}/> by Sixensor
             </span>
           </div>
         </Row>

@@ -16,6 +16,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+body{
+  font-family: 'Nunito Sans', sans-serif !important;
+}
+
 .tim-row {
   margin-bottom: 20px;
 }
@@ -87,7 +92,6 @@
 
 .demo-icons body {
   font-size: 1.6rem;
-  font-family: sans-serif;
   color: #333333;
   background: white;
 }
