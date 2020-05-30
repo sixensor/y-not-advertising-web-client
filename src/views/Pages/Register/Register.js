@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 import ModalHeader from "reactstrap/es/ModalHeader";
-
+import '../../../assets/dashboard-scss/style.scss'
 
 class Register extends Component {
 

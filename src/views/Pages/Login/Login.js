@@ -16,6 +16,9 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import '../../../assets/dashboard-scss/style.scss'
+
+
 class Login extends Component {
 
   constructor(props) {

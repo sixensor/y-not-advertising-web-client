@@ -2,6 +2,7 @@ import React, {Component, Suspense} from 'react';
 import * as router from 'react-router-dom';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Container} from 'reactstrap';
+import '../../assets/dashboard-scss/style.scss';
 
 import {
   AppBreadcrumb2 as AppBreadcrumb,
@@ -17,6 +18,7 @@ import {
 // routes config
 import routes from '../../routes';
 import SideBarNavItems from "./SideBarNavItems";
+
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
