@@ -17,9 +17,28 @@
 
 */
 
-body{
-  font-family: 'Nunito Sans', sans-serif !important;
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Nunito&display=swap');
+
+
+
+.content-text{
+  font-family: 'Nunito', sans-serif !important;
 }
+.header-text{
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif !important;
+}
+.page-header-text{
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif !important;
+}
+
+.testimonial-text{
+  font-style: italic;
+  font-size: 18px;
+  font-family: 'Kanit', sans-serif !important;
+}
+
 
 .tim-row {
   margin-bottom: 20px;

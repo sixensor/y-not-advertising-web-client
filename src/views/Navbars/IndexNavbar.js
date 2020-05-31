@@ -58,24 +58,68 @@ function IndexNavbar() {
   let navItems = ''
   if (session) {
     navItems = (
-      <section>
+      <>
+        <NavItem>
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href=""
+            target="_blank"
+            title="Like us on Facebook"
+          >
+            Facebook
+          </NavLink>
+        </NavItem>
         <NavItem>
           <Button
-            className="btn-round"
+            className="btn-round header-text"
             color=""
             href="/dasboard"
           >
             Dashboard
           </Button>
         </NavItem>
-      </section>
+        <NavItem>
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href="/Services"
+            target=""
+            title=""
+          >
+            Services
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href="/about-us"
+            target=""
+            title=""
+          >
+            About Us
+          </NavLink>
+        </NavItem>
+      </>
     )
   } else {
     navItems = (
       <>
         <NavItem>
+          <NavLink
+            className="content-text"
+            data-placement="bottom"
+            href=""
+            target="_blank"
+            title="Like us on Facebook"
+          >
+            Facebook
+          </NavLink>
+        </NavItem>
+        <NavItem>
           <Button
-            className="btn-round"
+            className="btn-round content-text"
             color=""
             href="/login"
           >
@@ -84,12 +128,34 @@ function IndexNavbar() {
         </NavItem>
         <NavItem>
           <Button
-            className="btn-round primary"
+            className="btn-round primary content-text"
             color=""
             href="/register"
           >
             Register
           </Button>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="content-text"
+            data-placement="bottom"
+            href="/Services"
+            target=""
+            title=""
+          >
+            Services
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="content-text"
+            data-placement="bottom"
+            href="/about-us"
+            target=""
+            title=""
+          >
+            About Us
+          </NavLink>
         </NavItem>
       </>
     )
@@ -103,7 +169,6 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/home"
-            target="_blank"
             title="Coded by Creative Tim"
           >
             Y-NOT Advertising
@@ -126,17 +191,6 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
           <Nav navbar>
-            <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href=""
-                target="_blank"
-                title="Like us on Facebook"
-              >
-                <i className="fa fa-facebook-square"/>
-                <p className="d-lg-none">Facebook</p>
-              </NavLink>
-            </NavItem>
             {navItems}
           </Nav>
         </Collapse>

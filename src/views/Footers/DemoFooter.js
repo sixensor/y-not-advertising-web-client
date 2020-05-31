@@ -40,7 +40,7 @@ function DemoFooter() {
           {/*    </li>*/}
           {/*  </ul>*/}
           {/*</nav>*/}
-          <div className="credits ml-auto">
+          <div className="credits ml-auto content-text">
             <span className="copyright">
               © {new Date().getFullYear()}, made with{" "}
               <FontAwesomeIcon icon={faHeart}/> by Sixensor

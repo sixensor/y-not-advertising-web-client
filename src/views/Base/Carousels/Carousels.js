@@ -80,12 +80,12 @@ class Carousels extends Component {
               backgroundImage:
                 "url(" + item.src + ")"
             }}
-          >
+          >0
             <div className="filter"/>
             <div className="content-center">
               <Container>
                 <div className="title-brand">
-                  <h1 className="carousel-title">
+                  <h1 className="header-text">
                     {item.title}
                   </h1>
                 </div>
