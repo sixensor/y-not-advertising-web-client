@@ -87,6 +87,7 @@ class CreateCampaign extends Component {
       return (
         <FormGroup>
           <Label for="scheduleTimeDatePicker">Date and Time</Label>
+          <br/>
           <DatePicker
             id="scheduleTimeDatePicker"
             selected={this.state.scheduled_date}
@@ -269,7 +270,7 @@ class CreateCampaign extends Component {
                     </Input>
                     {this.numberListInsertingFormat()}
                   </FormGroup>
-                  <Button color="primary">Pay and Send</Button>
+                  <Button color="dark">Pay and Send</Button>
                 </Form>
               </CardBody>
             </Card>

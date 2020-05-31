@@ -14,9 +14,11 @@ import {
   InputGroupText,
   Row,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios'
 import '../../../assets/dashboard-scss/style.scss'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 
 class Login extends Component {
@@ -65,13 +67,24 @@ class Login extends Component {
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
+              <Row>
+                <Col md="12">
+                  <span className="clearfix">
+                    <h3 className="header-text">Y-Not Advertising</h3>
+                    <h4 className="pt-3"></h4>
+                  </span>
+                  <Link to="/home">
+                    <Button color="link" className="mt-3 header-text" active tabIndex={-1}>Go To Home</Button>
+                  </Link>
+                </Col>
+              </Row>
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
                     <Form onSubmit={e => this.onSubmitLoginForm(e)}>
                       <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
-                      <InputGroup className="mb-3">
+                      <p className="text-muted content-text">Sign In to your account</p>
+                      <InputGroup className="mb-3 content-text">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-user"></i>
@@ -80,7 +93,7 @@ class Login extends Component {
                         <Input onChange={e => this.onChange(e)} value={this.state.email} name="email" type="email"
                                placeholder="Email" autoComplete="email"/>
                       </InputGroup>
-                      <InputGroup className="mb-4">
+                      <InputGroup className="mb-4 content-text">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-lock"></i>
@@ -94,11 +107,11 @@ class Login extends Component {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button color="primary" className="px-4  float-left">Login</Button>
+                          <Button color="dark" className="px-4  float-left header-text">Login</Button>
                         </Col>
                         <Col xs="6">
                           <Link to="/register">
-                            <Button color="link" className="mt-3 float-right" active tabIndex={-1}>Register
+                            <Button color="link" className="mt-3 float-right header-text" active tabIndex={-1}>Register
                               Now!</Button>
                           </Link>
                         </Col>
@@ -106,18 +119,16 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                {/*<Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>*/}
-                {/*  <CardBody className="text-center">*/}
-                {/*    <div>*/}
-                {/*      <h2>Register</h2>*/}
-                {/*      <p></p>*/}
-                {/*      <Link to="/register">*/}
-                {/*        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>*/}
-                {/*      </Link>*/}
-                {/*    </div>*/}
-                {/*  </CardBody>*/}
-                {/*</Card>*/}
               </CardGroup>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <div className="credits ml-auto content-text">
+                <span className="copyright">
+                  © {new Date().getFullYear()} Y-Not Advertising
+                </span>
+              </div>
             </Col>
           </Row>
         </Container>

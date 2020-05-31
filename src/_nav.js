@@ -301,10 +301,6 @@ export default {
       name: 'Transactions',
       url: '/base/carousels',
       icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
     },
   ],
 };

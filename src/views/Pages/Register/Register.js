@@ -18,6 +18,7 @@ import {
 import axios from "axios";
 import ModalHeader from "reactstrap/es/ModalHeader";
 import '../../../assets/dashboard-scss/style.scss'
+import {Link} from "react-router-dom";
 
 class Register extends Component {
 
@@ -89,7 +90,18 @@ class Register extends Component {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="9" lg="7" xl="6">
+            <Col md="8">
+              <Row>
+                <Col md="12">
+                  <span className="clearfix">
+                    <h3 className="header-text">Y-Not Advertising</h3>
+                    <h4 className="pt-3"></h4>
+                  </span>
+                  <Link to="/home">
+                    <Button color="link" className="mt-3 header-text" active tabIndex={-1}>Go To Home</Button>
+                  </Link>
+                </Col>
+              </Row>
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={e => this.onSubmitRegisterForm(e)}>
@@ -203,10 +215,19 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="password" placeholder="Repeat password"  required/>
                     </InputGroup>
-                    <Button color="danger" block>Create Account</Button>
+                    <Button color="dark" className="header-text" block>Create Account</Button>
                   </Form>
                 </CardBody>
               </Card>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <div className="credits ml-auto content-text">
+                <span className="copyright">
+                  © {new Date().getFullYear()} Y-Not Advertising
+                </span>
+              </div>
             </Col>
           </Row>
         </Container>

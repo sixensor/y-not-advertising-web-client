@@ -51,6 +51,9 @@ class DefaultLayout extends Component {
   render() {
     return (
       <div className="app">
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="-1" />
         <AppHeader fixed>
           <Suspense fallback={this.loading()}>
             <DefaultHeader onLogout={e => this.signOut(e)} openProfile={e => this.profile(e)}/>

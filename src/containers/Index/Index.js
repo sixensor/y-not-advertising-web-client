@@ -38,7 +38,7 @@ class Index extends Component {
                   <Button
                     className="btn-round"
                     color="default"
-                    href="#pablo"
+                    href="/services"
                     onClick={e => e.preventDefault()}
                   >
                     See Details
@@ -59,7 +59,7 @@ class Index extends Component {
                   <Button
                     className="btn-round header-text"
                     color="default"
-                    href="#pablo"
+                    href="/about-us"
                     onClick={e => e.preventDefault()}
                   >
                     See Details
@@ -118,7 +118,7 @@ class Index extends Component {
           </div>
           <div className="section section-dark text-center">
             <Container>
-              <h2 className="title header-text">Testimonials</h2>
+              {/*<h2 className="title header-text">Testimonials</h2>*/}
               <Row>
                 <Col md="12">
                   <Card className="card-plain">

@@ -89,7 +89,9 @@ class DefaultHeader extends Component {
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none " display="md" mobile/>
         <AppNavbarBrand>
-          Y - Not Advertising
+          <Link to="/home">
+            Y - Not Advertising
+          </Link>
         </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg"/>
 

@@ -26,7 +26,7 @@ export default {
       url: '/base/carousels',
       icon: 'icon-speedometer',
       badge: {
-        variant: 'info',
+        variant: 'success',
         text: 'NEW',
       },
     },

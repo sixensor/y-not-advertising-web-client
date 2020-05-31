@@ -278,7 +278,7 @@ class Profile extends Component {
                                id="city"
                                name="city"
                                placeholder="City" autoComplete="city" required/>
-                      </FormGroup> super(props);
+                      </FormGroup>
 
                     </Col>
                     <Col xs="6">
@@ -291,7 +291,7 @@ class Profile extends Component {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Input type="submit" color="primary" value="Save"/>
+                  <Button color="dark" type="submit">Save</Button>
                 </Form>
               </CardBody>
             </Card>
@@ -324,8 +324,8 @@ class Profile extends Component {
                        name="pn_verification_code"
                        placeholder="XXXX"/>
               </FormGroup>
-              <Badge color="success">{this.state.pn_verification_msg}</Badge>
-              <Badge color="danger">{this.state.pn_verification_err}</Badge>
+              <Badge color="dark">{this.state.pn_verification_msg}</Badge>
+              <Badge color="dark">{this.state.pn_verification_err}</Badge>
             </Form>
           </ModalBody>
           <ModalFooter>
