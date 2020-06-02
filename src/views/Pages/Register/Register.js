@@ -19,6 +19,11 @@ import axios from "axios";
 import ModalHeader from "reactstrap/es/ModalHeader";
 import '../../../assets/dashboard-scss/style.scss'
 import {Link} from "react-router-dom";
+import {ReCAPTCHA} from "react-google-recaptcha";
+
+
+
+const recaptchaRef = React.createRef();
 
 class Register extends Component {
 
@@ -85,9 +90,13 @@ class Register extends Component {
     })
   }
 
+  reCaptchaOnChange(value) {
+    console.log("Captcha value:", value);
+  }
+
   render() {
     return (
-      <div className="app flex-row align-items-center">
+      <div className="align-items-center">
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
@@ -214,6 +223,13 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="password" placeholder="Repeat password"  required/>
+                    </InputGroup>
+                    <InputGroup className="mb-4">
+                      <ReCAPTCHA
+                        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        onChange={this.reCaptchaOnChange}
+                        ref={recaptchaRef}
+                      />
                     </InputGroup>
                     <Button color="dark" className="header-text" block>Create Account</Button>
                   </Form>

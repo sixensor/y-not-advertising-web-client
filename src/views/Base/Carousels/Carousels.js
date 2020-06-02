@@ -6,19 +6,19 @@ import caroImage3 from '../../../assets/img/ynot/caro3.jpg'
 
 const items = [
   {
-    title: 'Identify more breakthrough business opportunities with Y-not Advertising',
+    title: 'Identify More Breakthrough Business Opportunities !',
     src: caroImage1,
     altText: '',
     caption: '',
   },
   {
-    title: 'Strengthen your marketing skills and engage more customers now!',
+    title: 'Strengthen Your Marketing Skills !',
     src: caroImage2,
     altText: '',
     caption: '',
   },
   {
-    title: 'Get an efficient and Innovative SMS gateway and start texting your customers today!',
+    title: 'Get An Efficient And Innovative SMS Gateway !',
     src: caroImage3,
     altText: '',
     caption: '',
@@ -85,7 +85,7 @@ class Carousels extends Component {
             <div className="content-center">
               <Container>
                 <div className="title-brand">
-                  <h1 className="header-text">
+                  <h1 className="main-slider-text">
                     {item.title}
                   </h1>
                 </div>
@@ -106,7 +106,6 @@ class Carousels extends Component {
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous}/>
           <CarouselControl direction="next" directionText="Next" onClickHandler={this.next}/>
         </Carousel>
-
       </div>
     );
   }

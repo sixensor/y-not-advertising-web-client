@@ -68,7 +68,6 @@ class CampaignPayment extends Component {
     return (
       <Row>
         <Col md={3}>
-          <Button type="submit" onClick={e=>this.test(e)} className="primary">Pay Now</Button>
         </Col>
         <Col md={6}>
           <Card>
@@ -76,26 +75,6 @@ class CampaignPayment extends Component {
               <a href="https://www.payhere.lk" target="_blank"><img
                 src="https://www.payhere.lk/downloads/images/payhere_long_banner.png" alt="PayHere" width="400"/></a>
               <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
-                {/*<input type="hidden" name="merchant_id" value="1213806"/>*/}
-                {/*<input type="hidden" name="return_url" value="http://sample.com/return"/>*/}
-                {/*<input type="hidden" name="notify_url" value="http://167.99.174.148:8001/api/v1.0/payhere/notify"/>*/}
-                {/*<br/><br/>Item Details<br/>*/}
-                {/*<input type="text" name="order_id" value="ItemNo12345"/>*/}
-                {/*<input type="text" name="items" value="Door bell wireless"/><br/>*/}
-                {/*<input type="text" name="currency" value="LKR"/>*/}
-                {/*<input type="text" name="amount" value="1000"/>*/}
-                {/*<input type="text" name="custom_1" value="1"/>*/}
-                {/*<input type="text" name="custom_2" value="1"/>*/}
-                {/*<br/><br/>Customer Details<br/>*/}
-                {/*<input type="text" name="first_name" value="Saman"/>*/}
-                {/*<input type="text" name="last_name" value="Perera"/><br/>*/}
-                {/*<input type="text" name="email" value="samanp@gmail.com"/>*/}
-                {/*<input type="text" name="phone" value="0771234567"/><br/>*/}
-                {/*<input type="text" name="address" value="No.1, Galle Road"/>*/}
-                {/*<input type="text" name="city" value="Colombo"/>*/}
-                {/*<input type="hidden" name="country" value="Sri Lanka"/><br/><br/>*/}
-                {/*<input type="submit" value="Buy Now"/>*/}
-
 
                 {/*Hidden variables*/}
                 <FormGroup>
@@ -110,7 +89,6 @@ class CampaignPayment extends Component {
                 <FormGroup>
                   <Input type="hidden" name="cancel_url" value={this.state.cancel_url}/>
                 </FormGroup>
-
 
                 {/*Visible variables*/}
                 <Row>

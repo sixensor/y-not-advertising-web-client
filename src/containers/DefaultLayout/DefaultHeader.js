@@ -90,18 +90,17 @@ class DefaultHeader extends Component {
         <AppSidebarToggler className="d-lg-none " display="md" mobile/>
         <AppNavbarBrand>
           <Link to="/home">
-            Y - Not Advertising
+            <img alt="..." className="img-fluid" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
           </Link>
         </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg"/>
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <Link to="/users" className="nav-link">{"Hi " + this.state.first_name + " " + this.state.last_name}</Link>
+            <Link to="/profile" className="nav-link">{"Hi " + this.state.first_name + " " + this.state.last_name}</Link>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
-
           <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
               <i className="icon-bell"></i><Badge pill color="danger">{this.state.notification_count}</Badge>

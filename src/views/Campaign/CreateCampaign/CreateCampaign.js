@@ -176,6 +176,7 @@ class CreateCampaign extends Component {
     }
   }
 
+
   // Submit create campaign
   createAndCheckoutCampaignSubmit(e) {
     const createCampaignUrl = "http://167.99.174.148:8001/api/v1.0/user/message-request/checkout"
@@ -270,7 +271,7 @@ class CreateCampaign extends Component {
                     </Input>
                     {this.numberListInsertingFormat()}
                   </FormGroup>
-                  <Button color="dark">Pay and Send</Button>
+                  <Button type="submit" color="dark">Pay and Send</Button>
                 </Form>
               </CardBody>
             </Card>

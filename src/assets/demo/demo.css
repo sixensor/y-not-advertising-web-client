@@ -21,6 +21,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
 
+
+.main-slider-text{
+  font-family: 'Kanit', sans-serif !important;
+}
 .content-text{
   font-family: 'Nunito', sans-serif !important;
 }
