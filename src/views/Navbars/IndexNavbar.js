@@ -171,7 +171,7 @@ function IndexNavbar() {
             href="/home"
             title="Coded by Creative Tim"
           >
-            <img alt="Y-Not Advertising" className="img-fluid" src={require("../../assets/img/ynot/logo-home.png")}/>
+            <img alt="Y-Not Advertising" className="img-fluid" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}

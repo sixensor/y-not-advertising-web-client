@@ -84,6 +84,9 @@ class CampaignHistory extends Component {
     )
   }
 
+
+
+  // Show alerts when
   showAlert(alert) {
     if (alert !== '')
       return (<>
@@ -92,6 +95,8 @@ class CampaignHistory extends Component {
         </Alert>
       </>)
   }
+
+
 
   render() {
     let campaigns;

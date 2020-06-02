@@ -70,7 +70,7 @@ class Login extends Component {
               <Row>
                 <Col md="12">
                   <span className="clearfix">
-                    <h3 className="header-text">Y-Not Advertising</h3>
+                    <img className="img-fluid" src={require("../../../assets/img/ynot/logo-home-dark.png")}/>
                     <h4 className="pt-3"></h4>
                   </span>
                   <Link to="/home">

@@ -22,7 +22,6 @@ import {Link} from "react-router-dom";
 import {ReCAPTCHA} from "react-google-recaptcha";
 
 
-
 const recaptchaRef = React.createRef();
 
 class Register extends Component {
@@ -96,14 +95,15 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="align-items-center">
+      <div className="app align-items-center">
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
               <Row>
                 <Col md="12">
+                  <br/>
                   <span className="clearfix">
-                    <h3 className="header-text">Y-Not Advertising</h3>
+                    <img className="img-fluid" src={require("../../../assets/img/ynot/logo-home-dark.png")}/>
                     <h4 className="pt-3"></h4>
                   </span>
                   <Link to="/home">
@@ -213,7 +213,8 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" name="password" placeholder="Password" onChange={e => this.onChange(e)} value={this.state.password}  required/>
+                      <Input type="password" name="password" placeholder="Password" onChange={e => this.onChange(e)}
+                             value={this.state.password} required/>
                     </InputGroup>
 
                     <InputGroup className="mb-4">
@@ -222,7 +223,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password"  required/>
+                      <Input type="password" placeholder="Repeat password" required/>
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <ReCAPTCHA
