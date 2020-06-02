@@ -10,6 +10,7 @@ import Carousels from "../../views/Base/Carousels";
 import Steps, {Step} from "rc-steps";
 import "rc-steps/assets/index.css";
 import "rc-steps/assets/iconfont.css";
+import {PricingDetail, PricingSlot, PricingTable} from 'react-pricing-table';
 
 // styles
 
@@ -69,7 +70,7 @@ class Index extends Component {
               <Row>
                 <Col className="ml-auto mr-auto content-text" md="8">
                   <h2 className="title header-text">Follow These Simple Steps</h2>
-                  <Steps direction="vertical"  current={5} status="">
+                  <Steps direction="vertical" current={5} status="">
                     <Step
                       title="Sign-Up and create an account"
                     />
@@ -134,6 +135,9 @@ class Index extends Component {
                 </Col>
               </Row>
             </Container>
+          </div>
+          <div className="sectiontext-center section-basic text-center">
+            <h2 className="title header-text">Price Plans</h2>
           </div>
           <DemoFooter/>
         </div>

@@ -40,6 +40,7 @@
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.10",
     "react-google-recaptcha": "^2.0.1",
+    "react-pricing-table": "^0.3.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "react-stepper-horizontal": "^1.0.11",
