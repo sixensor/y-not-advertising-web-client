@@ -17,11 +17,38 @@ class CampaignHistory extends Component {
 
     this.state = {
       campaigns: undefined,
-      to_date: new Date().toISOString(),
-      from_date: new Date().toISOString(),
+      to_date: this.formatDate(new Date().toISOString()),
+      from_date: this.formatDate(new Date().toISOString()),
       no_items_alert: ''
     }
   }
+
+  formatDateTime(dateStr) {
+    let date = new Date(dateStr);
+    return date.getFullYear() +
+      '-' + (date.getMonth() + 1) +
+      '-' + date.getDate() +
+      ' ' + date.getHours() +
+      ':' + date.getMinutes() +
+      ':' + date.getSeconds();
+  }
+
+  formatDate(dateStr) {
+    let date = new Date(dateStr);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return (year + '-' + month + '-' + dt);
+  }
+
 
   // Get current session bearer token
   getBearerToken() {
@@ -34,7 +61,13 @@ class CampaignHistory extends Component {
 
   componentDidMount() {
     // caller id must call here
-    const messageRequestsUrl = "http://localhost:8001/api/v1.0/user/message-requests?from_date=2020-05-12&to_date=2020-05-13";
+    this.callMessageRequests(this.state.from_date, this.state.to_date)
+  }
+
+
+  callMessageRequests(fromDate, toDate) {
+    const messageRequestsUrl = "http://167.99.174.148:8001/api/v1.0/user/message-requests?from_date="
+      + fromDate + "&to_date=" + toDate;
     axios.get(messageRequestsUrl,
       {
         headers: {
@@ -58,16 +91,6 @@ class CampaignHistory extends Component {
     });
   }
 
-  formatDate(dateStr) {
-    let date = new Date(dateStr);
-    return date.getFullYear() +
-      '-' + (date.getMonth() + 1) +
-      '-' + date.getDate() +
-      ' ' + date.getHours() +
-      ':' + date.getMinutes() +
-      ':' + date.getSeconds();
-  }
-
   getConfigurationButton(isTransactionCompleted, isMessageSend) {
     if (isTransactionCompleted === 0) {
       return (
@@ -84,8 +107,6 @@ class CampaignHistory extends Component {
     )
   }
 
-
-
   // Show alerts when
   showAlert(alert) {
     if (alert !== '')
@@ -96,8 +117,29 @@ class CampaignHistory extends Component {
       </>)
   }
 
+  handleFromDateChange(value, formattedValue) {
+    this.setState({
+      from_date: this.formatDate(value),
+    })
+    this.callMessageRequests(this.formatDate(value), this.state.to_date)
+  }
 
+  handleToDateChange(value, formattedValue) {
+    this.setState({
+      to_date: this.formatDate(value),
+    })
+    this.callMessageRequests(this.state.from_date, this.formatDate(value))
+  }
 
+  resetFilter(e) {
+    let currentDateFormatted = this.formatDate(new Date().toISOString())
+    this.setState({
+      to_date: currentDateFormatted,
+      from_date: currentDateFormatted,
+    })
+    this.callMessageRequests(currentDateFormatted, currentDateFormatted)
+  }
+  
   render() {
     let campaigns;
     if (this.state.campaigns !== undefined && this.state.campaigns !== null) {
@@ -107,7 +149,7 @@ class CampaignHistory extends Component {
           <td>{item.caller_id}</td>
           <td className="text-left">{item.content}</td>
           <td>{item.input_format}</td>
-          <td>{this.formatDate(item.created_data)}</td>
+          <td>{this.formatDateTime(item.created_data)}</td>
           <td>{this.getConfigurationButton(item.is_transaction_completed, item.is_message_send)}</td>
         </tr>
       );
@@ -128,24 +170,29 @@ class CampaignHistory extends Component {
                     <Col xs={6}>
                       <FormGroup>
                         <Label htmlFor="fromDate">From Date</Label>
-                        <DatePicker id="fromDate" value={this.state.from_date} showClearButton={false}/>
+                        <DatePicker id="fromDate" value={this.state.from_date}
+                                    onChange={(v, f) => this.handleFromDateChange(v, f)}
+                                    showClearButton={false}/>
                       </FormGroup>
                     </Col>
                     <Col xs={6}>
                       <FormGroup>
                         <Label htmlFor="toDate">To Date</Label>
-                        <DatePicker id="toDate" value={this.state.to_date} showClearButton={false}/>
+                        <DatePicker id="toDate" value={this.state.to_date}
+                                    onChange={(v, f) => this.handleToDateChange(v, f)}
+                                    showClearButton={false}/>
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col xs={12}>
-                      <Button type="submit" color="link" className="header-text btn-sm">Apply Filter</Button>
+                      <Button onClick={e => this.resetFilter(e)} color="link"
+                              className="header-text btn-sm">Reset</Button>
                     </Col>
                   </Row>
                 </Form>
                 <br/>
-                <table>
+                <table className="custom-table">
                   <thead>
                   <tr className="header-text">
                     <th>ID</th>

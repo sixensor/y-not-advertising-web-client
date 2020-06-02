@@ -73,7 +73,7 @@ class CampaignPayment extends Component {
           <Card>
             <CardBody>
               <a href="https://www.payhere.lk" target="_blank"><img
-                src="https://www.payhere.lk/downloads/images/payhere_long_banner.png" alt="PayHere" width="400"/></a>
+                src="https://www.payhere.lk/downloads/images/payhere_long_banner.png" alt="PayHere" className="img-fluid"/></a>
               <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
 
                 {/*Hidden variables*/}
