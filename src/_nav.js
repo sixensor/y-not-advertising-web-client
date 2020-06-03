@@ -77,7 +77,7 @@ export default {
     //       icon: 'icon-puzzle',
     //     },
     //     {
-    //       name: 'CampaignHistory groups',
+    //       name: 'TransactionHistory groups',
     //       url: '/base/list-groups',
     //       icon: 'icon-puzzle',
     //     },

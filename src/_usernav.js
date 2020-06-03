@@ -23,7 +23,7 @@ export default {
     },
     {
       name: 'Transactions',
-      url: '/base/carousels',
+      url: '/transaction/history',
       icon: 'icon-speedometer',
       badge: {
         variant: 'success',

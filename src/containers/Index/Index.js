@@ -21,7 +21,7 @@ class Index extends Component {
         {/*<LandingPage/>*/}
         <IndexNavbar/>
         {/*<IndexHeader/>*/}
-        <div className="main">
+        <div className="">
           <Carousels/>
           <div className="section">
             <Container>
@@ -32,7 +32,7 @@ class Index extends Component {
                     <strong>Y-Not Advertising</strong> is aimed at providing small businesses with cost-effective
                     SMS Gateway to ease the process of sending promotional texts and reminders to
                     pinpointed audiences. Using our Bulk SMS service will be effective to build a more
-                    reliable connection and communication between the organization and its customers. Furthermore,
+
                     it will help businesses enhance awareness and drive attention towards your brand.
                   </p>
                   <br/>

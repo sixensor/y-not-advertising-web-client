@@ -42,6 +42,7 @@ const CreateCampaign = React.lazy(() => import('./views/Campaign/CreateCampaign'
 const CampaignHistory = React.lazy(() => import('./views/Campaign/CampaignHistory'));
 const PayForCampaign = React.lazy(() => import('./views/Campaign/CampaignPayment'));
 const Profile = React.lazy(() => import('./views/Profile/Profile'));
+const UserTransactionHistory = React.lazy(() => import('./views/Transaction/TransactionHistory'));
 
 
 const routes = [
@@ -55,6 +56,7 @@ const routes = [
   {path: '/campaign/pay', name: 'Pay for Campaign', component: PayForCampaign},
   {path: '/dashboard', name: 'Dashboard', component: CreateCampaign},
   {path: '/profile', name: 'Profile', component: Profile},
+  {path: '/transaction/history', name: 'Transaction History', component: UserTransactionHistory},
 
   // {path: '/dashboard', name: 'Dashboard', component: Dashboard},
   // {path: '/theme', exact: true, name: 'Theme', component: Colors},
@@ -71,7 +73,7 @@ const routes = [
   // {path: '/base/collapses', name: 'Collapse', component: Collapses},
   // {path: '/base/dropdowns', name: 'Dropdowns', component: Dropdowns},
   // {path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons},
-  // {path: '/base/list-groups', name: 'CampaignHistory Groups', component: ListGroups},
+  // {path: '/base/list-groups', name: 'TransactionHistory Groups', component: ListGroups},
   // {path: '/base/navbars', name: 'Navbars', component: Navbars},
   // {path: '/base/navs', name: 'Navs', component: Navs},
   // {path: '/base/paginations', name: 'Paginations', component: Paginations},
