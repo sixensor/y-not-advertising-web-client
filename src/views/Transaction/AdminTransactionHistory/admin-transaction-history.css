@@ -1,0 +1,23 @@
+.custom-transaction-table {
+  border: 1px solid #ccc;
+}
+
+
+
+.custom-transaction-table tr {
+  background-color: rgba(187, 187, 187, 0.07);
+}
+
+.custom-transaction-table th,
+.custom-transaction-table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.custom-transaction-table th {
+  font-size: .75em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #efefef;
+  background-color: 	#2f353a;
+}

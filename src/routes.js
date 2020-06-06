@@ -43,7 +43,7 @@ const CampaignHistory = React.lazy(() => import('./views/Campaign/CampaignHistor
 const PayForCampaign = React.lazy(() => import('./views/Campaign/CampaignPayment'));
 const Profile = React.lazy(() => import('./views/Profile/Profile'));
 const UserTransactionHistory = React.lazy(() => import('./views/Transaction/TransactionHistory'));
-
+const AdminTransactionHistory = React.lazy(() => import('./views/Transaction/AdminTransactionHistory'));
 
 const routes = [
 
@@ -57,6 +57,10 @@ const routes = [
   {path: '/dashboard', name: 'Dashboard', component: CreateCampaign},
   {path: '/profile', name: 'Profile', component: Profile},
   {path: '/transaction/history', name: 'Transaction History', component: UserTransactionHistory},
+
+
+  // Admin panel pages
+  {path: '/admin/transactions', name: 'System Transactions', component: AdminTransactionHistory},
 
   // {path: '/dashboard', name: 'Dashboard', component: Dashboard},
   // {path: '/theme', exact: true, name: 'Theme', component: Colors},

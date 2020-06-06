@@ -23,12 +23,8 @@ export default {
     },
     {
       name: 'Transactions',
-      url: '/base/carousels',
+      url: '/admin/transactions',
       icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
     },
   ],
 };
