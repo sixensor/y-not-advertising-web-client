@@ -6,18 +6,18 @@ import Form from "reactstrap/lib/Form";
 import FormGroup from "reactstrap/lib/FormGroup";
 import Label from "reactstrap/lib/Label";
 import DatePicker from "reactstrap-date-picker";
-import './admin-transaction-history.css';
+import Input from "reactstrap/lib/Input";
+import './admin-campain-history.css';
 import Alert from "reactstrap/lib/Alert";
-import Table from "reactstrap/lib/Table";
 
-class AdminTransactionHistory extends Component {
+class AdminCampaignHistory extends Component {
 
 
   constructor(props) {
     super(props);
 
     this.state = {
-      transactions: undefined,
+      campaigns: undefined,
       to_date: this.formatDate(new Date().toISOString()),
       from_date: this.formatDate(new Date().toISOString()),
       no_items_alert: ''
@@ -46,6 +46,7 @@ class AdminTransactionHistory extends Component {
     if (month < 10) {
       month = '0' + month;
     }
+
     return (year + '-' + month + '-' + dt);
   }
 
@@ -61,35 +62,50 @@ class AdminTransactionHistory extends Component {
 
   componentDidMount() {
     // caller id must call here
-    this.callTransactions(this.state.from_date, this.state.to_date)
+    this.callMessageRequests(this.state.from_date, this.state.to_date)
   }
 
 
-  callTransactions(fromDate, toDate) {
-    const userTransactionsUrl = "http://localhost:8001/api/v1.0/user/transactions?from_date="
+  callMessageRequests(fromDate, toDate) {
+    const messageRequestsUrl = "http://167.99.174.148:8001/api/v1.0/user/message-requests?from_date="
       + fromDate + "&to_date=" + toDate;
-    axios.get(userTransactionsUrl,
+    axios.get(messageRequestsUrl,
       {
         headers: {
           Authorization: this.getBearerToken(),
         }
       }).then(resp => {
-      let transactions = resp.data.map(x => x);
-      console.log(transactions.length)
-      if (transactions.length === 0) {
+      let campaigns = resp.data.map(x => x);
+      console.log(campaigns.length)
+      if (campaigns.length === 0) {
         this.setState({
-          transactions: transactions,
+          campaigns: campaigns,
           no_items_alert: 'No Items to show !'
         });
       } else {
         this.setState({
-          transactions: transactions,
-          no_items_alert: ''
+          campaigns: campaigns,
         });
       }
     }).catch(err => {
       console.log(err)
     });
+  }
+
+  getConfigurationButton(isTransactionCompleted, isMessageSend) {
+    if (isTransactionCompleted === 0) {
+      return (
+        <Button className="btn-danger btn-sm header-text">Send</Button>
+      )
+    }
+    if (isMessageSend === 0) {
+      return (
+        <Button className="btn-warning btn-sm header-text">Pay Now</Button>
+      )
+    }
+    return (
+      <Button className="btn-success btn-sm header-text">Get Invoice</Button>
+    )
   }
 
   // Show alerts when
@@ -106,14 +122,14 @@ class AdminTransactionHistory extends Component {
     this.setState({
       from_date: this.formatDate(value),
     })
-    this.callTransactions(this.formatDate(value), this.state.to_date)
+    this.callMessageRequests(this.formatDate(value), this.state.to_date)
   }
 
   handleToDateChange(value, formattedValue) {
     this.setState({
       to_date: this.formatDate(value),
     })
-    this.callTransactions(this.state.from_date, this.formatDate(value))
+    this.callMessageRequests(this.state.from_date, this.formatDate(value))
   }
 
   resetFilter(e) {
@@ -122,25 +138,20 @@ class AdminTransactionHistory extends Component {
       to_date: currentDateFormatted,
       from_date: currentDateFormatted,
     })
-    this.callTransactions(currentDateFormatted, currentDateFormatted)
+    this.callMessageRequests(currentDateFormatted, currentDateFormatted)
   }
-
+  
   render() {
-    let transactions;
-    if (this.state.transactions !== undefined && this.state.transactions !== null) {
-      transactions = this.state.transactions.map(item =>
-        // "id": 1,
-        // "description": "",
-        // "message_request_id": 0,
-        // "additional_fees": "",
-        // "total": "100.00",
-        // "date": "2020-05-12T09:04:25+05:30"
+    let campaigns;
+    if (this.state.campaigns !== undefined && this.state.campaigns !== null) {
+      campaigns = this.state.campaigns.map(item =>
         <tr>
-          <td>{this.formatDateTime(item.date)}</td>
-          <td className="text-left">{item.description}</td>
-          <td>{item.message_request_id}</td>
-          <td className="text-right">{item.additional_fees}</td>
-          <td className="text-right">{item.total}</td>
+          <td>{item.id}</td>
+          <td>{item.caller_id}</td>
+          <td className="text-left">{item.content}</td>
+          <td>{item.input_format}</td>
+          <td>{this.formatDateTime(item.created_data)}</td>
+          <td>{this.getConfigurationButton(item.is_transaction_completed, item.is_message_send)}</td>
         </tr>
       );
     } else {
@@ -153,11 +164,25 @@ class AdminTransactionHistory extends Component {
           <Col md={12}>
             <Card>
               <CardBody>
-                <h4 className="header-text">System Transactions</h4>
+                <h4 className="header-text">System Campaigns</h4>
                 <br/>
                 <Form className="filter-font">
                   <Row>
-                    <Col xs={6}>
+                    <Col md={3}>
+                      <FormGroup>
+                        <Label htmlFor="email">E mail</Label>
+                        <Input onChange={e => this.onChange(e)} value={this.state.email} id="email" name="email" type="email"
+                               placeholder="E mail" autoComplete="email"/>
+                      </FormGroup>
+                    </Col>
+                    <Col md={3}>
+                      <FormGroup>
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input onChange={e => this.onChange(e)} value={this.state.phone} id="phone" name="phone" type="phone"
+                               placeholder="Phone Number" autoComplete="phone"/>
+                      </FormGroup>
+                    </Col>
+                    <Col md={3}>
                       <FormGroup>
                         <Label htmlFor="fromDate">From Date</Label>
                         <DatePicker id="fromDate" value={this.state.from_date}
@@ -165,7 +190,7 @@ class AdminTransactionHistory extends Component {
                                     showClearButton={false}/>
                       </FormGroup>
                     </Col>
-                    <Col xs={6}>
+                    <Col md={3}>
                       <FormGroup>
                         <Label htmlFor="toDate">To Date</Label>
                         <DatePicker id="toDate" value={this.state.to_date}
@@ -182,24 +207,21 @@ class AdminTransactionHistory extends Component {
                   </Row>
                 </Form>
                 <br/>
-                <Table responsive striped className="custom-transaction-table">
+                <table className="custom-table">
                   <thead>
                   <tr className="header-text">
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Request ID</th>
-                    <th>Extra Fees</th>
-                    <th>Total</th>
+                    <th>ID</th>
+                    <th>Caller Id</th>
+                    <th>Message Content</th>
+                    <th>Input Format</th>
+                    <th>Created Date</th>
+                    <th>Commands</th>
                   </tr>
                   </thead>
                   <tbody>
-                  {transactions}
-                  <tr>
-                    <td  className="total-text" colSpan="4">Total</td>
-                    <td  className="total-text">100.00</td>
-                  </tr>
+                  {campaigns}
                   </tbody>
-                </Table>
+                </table>
                 <br/>
                 {this.showAlert(this.state.no_items_alert)}
               </CardBody>
@@ -211,4 +233,4 @@ class AdminTransactionHistory extends Component {
   }
 }
 
-export default AdminTransactionHistory;
+export default AdminCampaignHistory;

@@ -16,10 +16,9 @@ class User extends Component {
         <Row>
           <Col lg={6}>
             <Card>
-              <CardHeader>
-                <strong><i className="icon-info pr-1"></i>User id: {this.props.match.params.id}</strong>
-              </CardHeader>
               <CardBody>
+                <h4 className="header-text">System Users</h4>
+                <br/>
                   <Table responsive striped hover>
                     <tbody>
                       {

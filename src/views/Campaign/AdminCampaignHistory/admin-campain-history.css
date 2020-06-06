@@ -1,0 +1,83 @@
+.custom-table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.custom-table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+.custom-table tr {
+  background-color: rgba(187, 187, 187, 0.07);
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.custom-table th {
+  font-size: .75em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #efefef;
+  background-color: 	#2f353a;
+
+}
+
+@media screen and (max-width: 600px) {
+  .custom-table {
+    border: 0;
+  }
+
+  .custom-table caption {
+    font-size: 1.3em;
+  }
+
+  .custom-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .custom-table tr {
+    border: 2px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .custom-table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: left;
+  }
+
+  .custom-table td::before {
+    content: attr(data-label);
+    float: right;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .custom-table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.filter-font {
+  font-size: 12px;
+}

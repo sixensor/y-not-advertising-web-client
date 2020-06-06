@@ -6,12 +6,17 @@ export default {
     },
     {
       name: 'Users',
-      url: '/campaign/create',
+      url: '/admin/users',
       icon: 'icon-puzzle',
     },
     {
       name: 'Caller IDs',
-      url: '/campaign/history',
+      url: '/admin/caller-id',
+      icon: 'icon-puzzle',
+    },
+    {
+      name: 'Campaigns',
+      url: '/admin/campaigns',
       icon: 'icon-puzzle',
     },
     {

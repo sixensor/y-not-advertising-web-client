@@ -1,4 +1,5 @@
 import React from 'react';
+import CallerId from './views/CallerId/CallerId';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -33,7 +34,6 @@ const Modals = React.lazy(() => import('./views/Notifications/Modals'));
 const Colors = React.lazy(() => import('./views/Theme/Colors'));
 const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
-const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 
 
@@ -44,11 +44,11 @@ const PayForCampaign = React.lazy(() => import('./views/Campaign/CampaignPayment
 const Profile = React.lazy(() => import('./views/Profile/Profile'));
 const UserTransactionHistory = React.lazy(() => import('./views/Transaction/TransactionHistory'));
 const AdminTransactionHistory = React.lazy(() => import('./views/Transaction/AdminTransactionHistory'));
+const AdminCampaignHistory = React.lazy(()=>import('./views/Campaign/AdminCampaignHistory'))
+const AdminUsers = React.lazy(() => import('./views/Users/Users'));
+const AdminCallerIds = React.lazy(() => import('./views/CallerId/CallerId'));
 
 const routes = [
-
-  // Role parameters added
-  // {path: '/', exact: true, name: 'Home'},
 
   // Custom routes
   {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign},
@@ -58,50 +58,12 @@ const routes = [
   {path: '/profile', name: 'Profile', component: Profile},
   {path: '/transaction/history', name: 'Transaction History', component: UserTransactionHistory},
 
-
   // Admin panel pages
   {path: '/admin/transactions', name: 'System Transactions', component: AdminTransactionHistory},
+  {path: '/admin/campaigns', name: 'System Campaigns', component: AdminCampaignHistory},
+  {path: '/admin/users', name: 'System Users', component: AdminUsers},
+  {path: '/admin/caller-id', name: 'System Caller IDs', component: CallerId},
 
-  // {path: '/dashboard', name: 'Dashboard', component: Dashboard},
-  // {path: '/theme', exact: true, name: 'Theme', component: Colors},
-  {path: '/theme/colors', name: 'Colors', component: Colors},
-  {path: '/theme/typography', name: 'Typography', component: Typography},
-  // {path: '/base', exact: true, name: 'Base', component: Cards},
-  // {path: '/base/cards', name: 'Cards', component: Cards},
-  {path: '/base/forms', name: 'Forms', component: Forms},
-  // {path: '/base/switches', name: 'Switches', component: Switches},
-  // {path: '/base/tables', name: 'Tables', component: Tables},
-  // {path: '/base/tabs', name: 'Tabs', component: Tabs},
-  // {path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs},
-  // {path: '/base/carousels', name: 'Carousel', component: Carousels},
-  // {path: '/base/collapses', name: 'Collapse', component: Collapses},
-  // {path: '/base/dropdowns', name: 'Dropdowns', component: Dropdowns},
-  // {path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons},
-  // {path: '/base/list-groups', name: 'TransactionHistory Groups', component: ListGroups},
-  // {path: '/base/navbars', name: 'Navbars', component: Navbars},
-  // {path: '/base/navs', name: 'Navs', component: Navs},
-  // {path: '/base/paginations', name: 'Paginations', component: Paginations},
-  // {path: '/base/popovers', name: 'Popovers', component: Popovers},
-  // {path: '/base/progress-bar', name: 'Progress Bar', component: ProgressBar},
-  // {path: '/base/tooltips', name: 'Tooltips', component: Tooltips},
-  // {path: '/buttons', exact: true, name: 'Buttons', component: Buttons},
-  // {path: '/buttons/buttons', name: 'Buttons', component: Buttons},
-  // {path: '/buttons/button-dropdowns', name: 'Button Dropdowns', component: ButtonDropdowns},
-  // {path: '/buttons/button-groups', name: 'Button Groups', component: ButtonGroups},
-  // {path: '/buttons/brand-buttons', name: 'Brand Buttons', component: BrandButtons},
-  // {path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons},
-  // {path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons},
-  // {path: '/icons/flags', name: 'Flags', component: Flags},
-  // {path: '/icons/font-awesome', name: 'Font Awesome', component: FontAwesome},
-  // {path: '/icons/simple-line-icons', name: 'Simple Line Icons', component: SimpleLineIcons},
-  // {path: '/notifications', exact: true, name: 'Notifications', component: Alerts},
-  // {path: '/notifications/alerts', name: 'Alerts', component: Alerts},
-  // {path: '/notifications/badges', name: 'Badges', component: Badges},
-  // {path: '/notifications/modals', name: 'Modals', component: Modals},
-  // {path: '/widgets', name: 'Widgets', component: Widgets},
-  // {path: '/charts', name: 'Charts', component: Charts},
-  // {path: '/users', exact: true, name: 'Users', component: Users},
-  // {path: '/users/:id', exact: true, name: 'User Details', component: User},
 ];
 
 export default routes;
