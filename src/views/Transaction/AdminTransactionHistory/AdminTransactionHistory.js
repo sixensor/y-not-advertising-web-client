@@ -20,7 +20,8 @@ class AdminTransactionHistory extends Component {
       transactions: undefined,
       to_date: this.formatDate(new Date().toISOString()),
       from_date: this.formatDate(new Date().toISOString()),
-      no_items_alert: ''
+      no_items_alert: '',
+      total: ''
     }
   }
 
@@ -66,7 +67,7 @@ class AdminTransactionHistory extends Component {
 
 
   callTransactions(fromDate, toDate) {
-    const userTransactionsUrl = "http://localhost:8001/api/v1.0/user/transactions?from_date="
+    const userTransactionsUrl = "http://localhost:8001/api/v1.0/admin/transactions?from_date="
       + fromDate + "&to_date=" + toDate;
     axios.get(userTransactionsUrl,
       {
@@ -74,17 +75,19 @@ class AdminTransactionHistory extends Component {
           Authorization: this.getBearerToken(),
         }
       }).then(resp => {
-      let transactions = resp.data.map(x => x);
+      let transactions = resp.data.detail_view_list.map(x => x);
       console.log(transactions.length)
       if (transactions.length === 0) {
         this.setState({
           transactions: transactions,
-          no_items_alert: 'No Items to show !'
+          no_items_alert: 'No Items to show !',
+          total: "0.00",
         });
       } else {
         this.setState({
           transactions: transactions,
-          no_items_alert: ''
+          no_items_alert: '',
+          total: resp.data.total,
         });
       }
     }).catch(err => {
@@ -129,12 +132,6 @@ class AdminTransactionHistory extends Component {
     let transactions;
     if (this.state.transactions !== undefined && this.state.transactions !== null) {
       transactions = this.state.transactions.map(item =>
-        // "id": 1,
-        // "description": "",
-        // "message_request_id": 0,
-        // "additional_fees": "",
-        // "total": "100.00",
-        // "date": "2020-05-12T09:04:25+05:30"
         <tr>
           <td>{this.formatDateTime(item.date)}</td>
           <td className="text-left">{item.description}</td>
@@ -196,7 +193,7 @@ class AdminTransactionHistory extends Component {
                   {transactions}
                   <tr>
                     <td  className="total-text" colSpan="4">Total</td>
-                    <td  className="total-text">100.00</td>
+                    <td  className="total-text">{this.state.total}</td>
                   </tr>
                   </tbody>
                 </Table>
