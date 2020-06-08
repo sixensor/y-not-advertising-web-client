@@ -11,35 +11,15 @@ import './admin-system-users.css'
 
 import usersData from './UsersData'
 
-function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
 
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
 
-  return (
-    <tr key={user.id.toString()}>
-      <td scope="row">{user.id}</td>
-      <td>{user.name}</td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td>{user.status}</td>
-    </tr>
-  )
-}
+
+
+
 
 class Users extends Component {
-
   render() {
-
-    const userList = usersData.filter((user) => user.id < 10)
-
+    const userList = usersData.filter((user) => user.id)
     return (
       <div className="animated fadeIn">
         <Row>
@@ -75,17 +55,14 @@ class Users extends Component {
                 <table className="custom-table" >
                   <thead>
                     <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Phone Number</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Role</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
-                    )}
                   </tbody>
                 </table>
               </CardBody>
