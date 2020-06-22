@@ -79,7 +79,7 @@ class Users extends Component {
   }
 
   getUsers() {
-    const usersRequestsUrl = "http://localhost:8001/api/v1.0/admin/users?phone=" + this.state.phone + "&email=" + this.state.email;
+    const usersRequestsUrl = "http://y-not.lk:8001/api/v1.0/admin/users?phone=" + this.state.phone + "&email=" + this.state.email;
     axios.get(usersRequestsUrl,
       {
         headers: {

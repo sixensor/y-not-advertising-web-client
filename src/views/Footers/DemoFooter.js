@@ -20,30 +20,27 @@
 import React from "react";
 // reactstrap components
 import {Container, Row} from "reactstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee,faHeart } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faHeart} from '@fortawesome/free-solid-svg-icons'
 
 function DemoFooter() {
   return (
     <footer className="footer footer-black footer-white">
       <Container>
         <Row>
-          {/*<nav className="footer-nav">*/}
-          {/*  <ul>*/}
-          {/*    <li>*/}
-          {/*      <a*/}
-          {/*        href=""*/}
-          {/*        target="_blank"*/}
-          {/*      >*/}
-          {/*        Y Not Advertising*/}
-          {/*      </a>*/}
-          {/*    </li>*/}
-          {/*  </ul>*/}
-          {/*</nav>*/}
+          <nav className="footer-nav">
+            <ul>
+              <li>
+                <a href="/terms-conditions">Terms Conditions</a>
+              </li>
+              <li>
+                <a href="/privacy-policy">Privacy Policy</a>
+              </li>
+            </ul>
+          </nav>
           <div className="credits ml-auto content-text">
             <span className="copyright">
-              © {new Date().getFullYear()}, made with{" "}
-              <FontAwesomeIcon icon={faHeart}/> by Sixensor
+              © {new Date().getFullYear()} by Y-Not Advertising
             </span>
           </div>
         </Row>

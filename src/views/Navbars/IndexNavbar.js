@@ -83,7 +83,7 @@ function IndexNavbar() {
           <NavLink
             className="header-text"
             data-placement="bottom"
-            href="/Services"
+            href="/services"
             target=""
             title=""
           >
@@ -99,6 +99,17 @@ function IndexNavbar() {
             title=""
           >
             About Us
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href="/contact-us"
+            target=""
+            title=""
+          >
+            Contact Us
           </NavLink>
         </NavItem>
       </>
@@ -139,11 +150,11 @@ function IndexNavbar() {
           <NavLink
             className="content-text"
             data-placement="bottom"
-            href="/Services"
+            href="/TermsAndConditions"
             target=""
             title=""
           >
-            Services
+            TermsAndConditions
           </NavLink>
         </NavItem>
         <NavItem>
@@ -155,6 +166,17 @@ function IndexNavbar() {
             title=""
           >
             About Us
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href="/contact-us"
+            target=""
+            title=""
+          >
+            Contact Us
           </NavLink>
         </NavItem>
       </>
@@ -171,7 +193,8 @@ function IndexNavbar() {
             href="/home"
             title="Coded by Creative Tim"
           >
-            <img alt="Y-Not Advertising" className="img-fluid" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
+            <img alt="Y-Not Advertising" className="img-fluid"
+                 src={require("../../assets/img/ynot/logo-home-dark.png")}/>
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}

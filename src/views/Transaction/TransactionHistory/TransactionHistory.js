@@ -66,7 +66,7 @@ class TransactionHistory extends Component {
 
 
   callTransactions(fromDate, toDate) {
-    const userTransactionsUrl = "http://localhost:8001/api/v1.0/user/transactions?from_date="
+    const userTransactionsUrl = "http://y-not.lk:8001/api/v1.0/user/transactions?from_date="
       + fromDate + "&to_date=" + toDate;
     axios.get(userTransactionsUrl,
       {

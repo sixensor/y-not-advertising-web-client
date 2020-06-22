@@ -8,14 +8,15 @@ class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: undefined
+      session: undefined,
+      role: 1,
     }
   }
 
   componentDidMount() {
     let session = localStorage.getItem('Session')
     if (!session) {
-      this.props.history.push('/home')
+      this.props.history.push('/home');
     }
   }
 

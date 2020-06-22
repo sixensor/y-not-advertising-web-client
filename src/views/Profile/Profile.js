@@ -59,7 +59,7 @@ class Profile extends Component {
 
   // Initialize the components
   componentDidMount() {
-    let getUserUrl = "http://167.99.174.148:8001/api/v1.0/user/profile";
+    let getUserUrl = "http://167.99.174.148:8001/api/v1.0/common/profile";
     // get user details call
     axios.get(getUserUrl,
       {
