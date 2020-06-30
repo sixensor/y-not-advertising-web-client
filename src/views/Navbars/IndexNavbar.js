@@ -148,13 +148,13 @@ function IndexNavbar() {
         </NavItem>
         <NavItem>
           <NavLink
-            className="content-text"
+            className="header-text"
             data-placement="bottom"
-            href="/TermsAndConditions"
+            href="/services"
             target=""
             title=""
           >
-            TermsAndConditions
+            Services
           </NavLink>
         </NavItem>
         <NavItem>

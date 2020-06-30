@@ -1,0 +1,128 @@
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:800);
+
+.wrapper {
+  font-family: 'Nunito', sans-serif !important;
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px 10px 10px;
+}
+.wrapper .plan {
+  margin: 50px 10px 10px;
+  background-color: #262626;
+  border: 1px solid #1e1e1e;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+.wrapper .plan:hover, wrapper .plan.hover {
+  background-color: #1c1c1c;
+}
+.wrapper .plan:hover i, wrapper .plan.hover i {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.wrapper * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+.wrapper header {
+  position: relative;
+  padding: 20px 10px;
+}
+.wrapper header i {
+  font-size: 56px;
+  margin: 0 15px;
+  color: #a80200;
+  display: inline-block;
+  float: left;
+}
+.wrapper .plan-title {
+  top: 0;
+  font-weight: 800;
+  margin: 10px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.wrapper .plan-cost {
+  margin: 0;
+  opacity: 0.2;
+}
+.wrapper .plan-price {
+  font-family: 'Kanit', sans-serif !important;
+  font-weight: 800;
+  font-size: 1.3em;
+}
+.wrapper .plan-type {
+  opacity: 0.8;
+  font-size: 0.7em;
+  text-transform: uppercase;
+}
+.wrapper .plan-features {
+  padding: 0;
+  margin: 0 0 40px;
+  text-align: center;
+  list-style: outside none none;
+  font-size: 0.8em;
+  text-align: left;
+}
+.wrapper .plan-features li {
+  padding: 5px 5%;
+  font-weight: 500;
+  opacity: 0.5;
+  border-left: 5px solid #A80200;
+  margin: 2px 20px;
+}
+.wrapper .plan-select {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.wrapper .plan-select a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 15px 20px;
+  margin: 20px;
+  border-radius: 40px;
+  font-size: 0.75em;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  background-color: #A80200;
+}
+.wrapper .plan-select a:hover {
+  background-color: #262626;
+}
+.wrapper .featured {
+  margin-top: -10px;
+  background-color: #262626;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+.wrapper .featured .plan-select a {
+  margin: 30px 20px;
+}
+/*@media only screen and (max-width: 767px) {*/
+/*  .wrapper .plan {*/
+/*    width: 50%;*/
+/*  }*/
+/*  .wrapper .plan-title, .wrapper .plan-select a {*/
+/*    -webkit-transform: translateY(0);*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*  .wrapper .plan-select a, .wrapper .featured .plan-select a {*/
+/*    margin: 20px;*/
+/*  }*/
+/*  .wrapper .featured {*/
+/*    margin-top: 0;*/
+/*  }*/
+/*}*/
+
+/*@media only screen and (max-width: 440px) {*/
+/*  .wrapper .plan {*/
+/*    width: 100%;*/
+/*  }*/
+/*}*/

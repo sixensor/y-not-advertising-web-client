@@ -10,6 +10,7 @@ import Carousels from "../../views/Base/Carousels";
 import Steps, {Step} from "rc-steps";
 import "rc-steps/assets/index.css";
 import "rc-steps/assets/iconfont.css";
+import "./index.css"
 import {PricingDetail, PricingSlot, PricingTable} from 'react-pricing-table';
 
 // styles
@@ -26,7 +27,7 @@ class Index extends Component {
           <div className="section">
             <Container>
               <Row>
-                <Col className="ml-auto mr-auto" md="8">
+                <Col className="ml-auto mr-auto" md="12">
                   <h2 className="title header-text">Our Service</h2>
                   <p className="description content-text">
                     <strong>Y-Not Advertising</strong> is aimed at providing small businesses with cost-effective
@@ -47,7 +48,7 @@ class Index extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="ml-auto mr-auto" md="8">
+                <Col className="ml-auto mr-auto" md="12">
                   <h2 className="title header-text">About Us</h2>
                   <p className="description content-text">
                     Initiated as a small Bulk SMS service provider in Sri Lanka in 2012,
@@ -68,7 +69,7 @@ class Index extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="ml-auto mr-auto content-text" md="8">
+                <Col className="ml-auto mr-auto content-text" md="12">
                   <h2 className="title header-text">Follow These Simple Steps</h2>
                   <Steps direction="vertical" current={5} status="">
                     <Step
@@ -90,7 +91,7 @@ class Index extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="ml-auto mr-auto" md="8">
+                <Col className="ml-auto mr-auto" md="12">
                   <h2 className="title header-text">Our Service</h2>
                   <h3 className="title header-text">Engage More Customers</h3>
                   <p className="description content-text">
@@ -117,27 +118,46 @@ class Index extends Component {
               </Row>
             </Container>
           </div>
-          <div className="section section-dark text-center">
+          {/*<div className="section section-dark text-center">*/}
+          {/*  <Container>*/}
+          {/*    /!*<h2 className="title header-text">Testimonials</h2>*!/*/}
+          {/*    <Row>*/}
+          {/*      <Col md="12">*/}
+          {/*        <Card className="card-plain">*/}
+          {/*          <CardBody>*/}
+          {/*            <p className="card-description text-center testimonial-text">*/}
+          {/*              " It helped me get more clients, and I got responses from hundreds*/}
+          {/*              and thousands of people in days. It’s the best and the most reliable*/}
+          {/*              service I’ve ever used that addressed significant marketing concerns*/}
+          {/*              and largely contributed to higher profits. "*/}
+          {/*            </p>*/}
+          {/*          </CardBody>*/}
+          {/*        </Card>*/}
+          {/*      </Col>*/}
+          {/*    </Row>*/}
+          {/*  </Container>*/}
+          {/*</div>*/}
+          <div className="section text-center text-center">
+            <h2 className="title header-text">Price Plans</h2>
             <Container>
-              {/*<h2 className="title header-text">Testimonials</h2>*/}
               <Row>
-                <Col md="12">
-                  <Card className="card-plain">
-                    <CardBody>
-                      <p className="card-description text-center testimonial-text">
-                        " It helped me get more clients, and I got responses from hundreds
-                        and thousands of people in days. It’s the best and the most reliable
-                        service I’ve ever used that addressed significant marketing concerns
-                        and largely contributed to higher profits. "
-                      </p>
-                    </CardBody>
-                  </Card>
+                <Col md="3"></Col>
+                <Col className="wrapper" md="6">
+                    <div className="plan">
+                      <header><i className="ion-ios-navigate-outline"></i>
+                        <h4 className="plan-title">Starter</h4>
+                        <div className="plan-cost"><span className="plan-price">Rs 1299/-</span><span
+                          className="plan-type">for Registration</span></div>
+                      </header>
+                      <ul className="plan-features">
+                        <li>Rs 0.99 per message</li>
+                        <li>Rs 299 for new Caller ID (*caller id must be available)</li>
+                      </ul>
+                      <div className="plan-select"><a href="/register">Register Now</a></div>
+                    </div>
                 </Col>
               </Row>
             </Container>
-          </div>
-          <div className="sectiontext-center section-basic text-center">
-            <h2 className="title header-text">Price Plans</h2>
           </div>
           <DemoFooter/>
         </div>

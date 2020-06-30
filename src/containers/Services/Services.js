@@ -37,9 +37,10 @@ class Services extends Component {
                   <h2 className="page-header-text">Services</h2>
                   <br/>
                   <p className="description content-text">
-                    Planning to reach out to a wider customer base?
+                    <h5>Planning to reach out to a wider customer base?</h5>
                     Y-Not Advertising has a professional solution that meets
                     your communication and marketing goals quickly and efficiently.
+                    <br/>
                     With our system designed for Mass Messaging to the targeted customers,
                     you’ll be able to send instant messages to small and large groups of
                     people to keep them updated and engaged. Once signed up, you’ll get a
@@ -47,12 +48,16 @@ class Services extends Component {
                     any standard mobile number. Recipients will get receive your message instantly.
                     This can be the fastest way for your businesses to let customers know about the promotions,
                     discount vouchers, and coupons, collect feedbacks and surveys, and to inform then
-                    about new products. Our system is designed using years of experience and technological
+                    about new products.
+                    <br/>
+                    Our system is designed using years of experience and technological
                     expertise and has a user-interactive interface that brings an easier, faster and cost-effective
                     marketing opportunity for small businesses. With our intuitive system,
                     you just have to choose how you want to send your bulk SMS and leave the
                     rest to us. We help you compose, send, and respond to messages quickly with
-                    one system without having your energy drained in the process. Following a few simple steps,
+                    one system without having your energy drained in the process.
+                    <br/>
+                    Following a few simple steps,
                     you’ll be able to create a contact list and send text messages in a concise time with our
                     high-performance
                     SMS gateway. So, Y-Not Advertising, with its team of qualified professionals,

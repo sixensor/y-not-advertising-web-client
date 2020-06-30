@@ -20,6 +20,8 @@ import ModalHeader from "reactstrap/es/ModalHeader";
 import '../../../assets/dashboard-scss/style.scss'
 import {Link} from "react-router-dom";
 import {ReCAPTCHA} from "react-google-recaptcha";
+import Label from "reactstrap/lib/Label";
+import FormGroup from "reactstrap/lib/FormGroup";
 
 
 const recaptchaRef = React.createRef();
@@ -41,14 +43,22 @@ class Register extends Component {
       country: '',
       err_status: false,
       err_message: '',
+      enable_submit_button:false,
     }
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
     console.log(JSON.stringify(this.state))
+  }
+
+  onTickTermsConditions(e){
+    console.log(e.target.value);
+    this.setState({
+      enable_submit_button: true
+    });
   }
 
   onSubmitRegisterForm(e) {
@@ -216,7 +226,6 @@ class Register extends Component {
                       <Input type="password" name="password" placeholder="Password" onChange={e => this.onChange(e)}
                              value={this.state.password} required/>
                     </InputGroup>
-
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -232,7 +241,12 @@ class Register extends Component {
                         ref={recaptchaRef}
                       />
                     </InputGroup>
-                    <Button color="dark" className="header-text" block>Create Account</Button>
+                    <FormGroup check>
+                      <Input type="checkbox" name="termsConditions" id="termsConditions"  onChange={e => this.onTickTermsConditions(e)}/>
+                      <p>I accept <a href="/terms-conditions">terms and conditions</a></p>
+                    </FormGroup>
+                    <br/>
+                    <Button disabled={!this.state.enable_submit_button} color="dark" className="header-text" block>Create Account</Button>
                   </Form>
                 </CardBody>
               </Card>
