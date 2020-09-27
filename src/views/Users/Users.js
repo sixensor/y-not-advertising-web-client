@@ -9,6 +9,7 @@ import Input from "reactstrap/lib/Input";
 import './admin-system-users.css'
 import axios from "axios";
 import Badge from "reactstrap/lib/Badge";
+import Env from "../Env/env"
 
 
 class Users extends Component {
@@ -79,7 +80,7 @@ class Users extends Component {
   }
 
   getUsers() {
-    const usersRequestsUrl = "http://y-not.lk:8001/api/v1.0/admin/users?phone=" + this.state.phone + "&email=" + this.state.email;
+    const usersRequestsUrl = Env.getURL("/api/v1.0/admin/users?phone=" + this.state.phone + "&email=" + this.state.email);
     axios.get(usersRequestsUrl,
       {
         headers: {
