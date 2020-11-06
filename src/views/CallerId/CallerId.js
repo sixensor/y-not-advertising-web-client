@@ -19,12 +19,12 @@ class CallerId extends Component {
   }
 
   componentDidMount() {
-    this.callMessageRequests()
+    this.getCallerIdsHttpRequest()
   }
 
 
   // Get current session bearer token
-  getBearerToken() {
+  getSessionToken() {
     let session = JSON.parse(localStorage.getItem('Session'));
     if (!session) {
       this.props.history.push('/login');
@@ -32,12 +32,12 @@ class CallerId extends Component {
     return 'Bearer ' + session.token
   }
 
-  callMessageRequests() {
+  getCallerIdsHttpRequest() {
     const messageRequestsUrl = Env.getURL("/api/v1.0/admin/caller-ids");
     axios.get(messageRequestsUrl,
       {
         headers: {
-          Authorization: this.getBearerToken(),
+          Authorization: this.getSessionToken(),
         }
       }).then(resp => {
       let callerIds = resp.data.map(x => x);
@@ -56,8 +56,20 @@ class CallerId extends Component {
     });
   }
 
+  deleteCallerID(id) {
+    const deleteCallerIdUrl = Env.getURL("/api/v1.0/admin/caller-id/" + id);
+    axios.delete(deleteCallerIdUrl,
+      {
+        headers: {
+          Authorization: this.getSessionToken(),
+        }
+      }).then(resp => {
+        this.getCallerIdsHttpRequest();
+    }).catch(err => {
+    });
+  }
 
-  systemCallerIDList() {
+  renderCallerIdList() {
     let callerIds;
     if (this.state.caller_ids !== undefined && this.state.caller_ids !== null) {
       callerIds = this.state.caller_ids.map(ci =>
@@ -65,9 +77,9 @@ class CallerId extends Component {
           <td>{ci.id}</td>
           <td>{ci.code}</td>
           <td className="text-left">{ci.description}</td>
-          {this.getCallerIDActivationTag(ci.is_activated)}
+          {this.renderCallerIdBadge(ci.is_activated)}
           <td className="text-center">
-            <Button onClick={e => this.resetFilter(e)} color="link"
+            <Button onClick={e => this.deleteCallerID(ci.id)} color="link"
                     className="header-text btn-sm"><i className="icon-trash"/></Button>
           </td>
         </tr>
@@ -79,7 +91,7 @@ class CallerId extends Component {
     }
   }
 
-  getCallerIDActivationTag(state) {
+  renderCallerIdBadge(state) {
     if (state === 1) {
       return <td><Badge color="success">Activated</Badge></td>
     } else {
@@ -106,7 +118,7 @@ class CallerId extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.systemCallerIDList()}
+                {this.renderCallerIdList()}
                 </tbody>
               </table>
               <br/>

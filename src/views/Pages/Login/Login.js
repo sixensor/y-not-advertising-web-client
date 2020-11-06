@@ -17,8 +17,7 @@ import {
 import {Link} from 'react-router-dom';
 import axios from 'axios'
 import '../../../assets/dashboard-scss/style.scss'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart} from "@fortawesome/free-solid-svg-icons";
+import Env from "../../Env/env";
 
 
 class Login extends Component {
@@ -40,16 +39,16 @@ class Login extends Component {
   }
 
   onSubmitLoginForm(e) {
-    const loginUrl = "http://167.99.174.148:8001/api/v1.0/login";
+    const loginUrl = Env.getURL("/api/v1.0/login");
     e.preventDefault();
     axios.post(loginUrl, {
       email: this.state.email,
       password: this.state.password
     }).then(resp => {
-      localStorage.setItem('Session', JSON.stringify(resp.data))
+      localStorage.setItem('Session', JSON.stringify(resp.data));
       this.props.history.push('/dashboard')
     }).catch(err => {
-      console.log(err.response.data)
+      console.log(err.response.data);
       let message = '';
       if (err.response.data.code === 100) {
         message = 'Invalid credentials.'
