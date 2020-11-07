@@ -22,6 +22,7 @@ import {Link} from "react-router-dom";
 import {ReCAPTCHA} from "react-google-recaptcha";
 import Label from "reactstrap/lib/Label";
 import FormGroup from "reactstrap/lib/FormGroup";
+import Env from "../../Env/env";
 
 
 const recaptchaRef = React.createRef();
@@ -62,7 +63,7 @@ class Register extends Component {
   }
 
   onSubmitRegisterForm(e) {
-    const loginUrl = "http://167.99.174.148:8001/api/v1.0/register";
+    const loginUrl = Env.getURL("/api/v1.0/register");
     e.preventDefault();
     axios.post(loginUrl, {
       first_name: this.state.first_name,

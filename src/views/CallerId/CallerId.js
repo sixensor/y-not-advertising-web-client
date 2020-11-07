@@ -64,7 +64,7 @@ class CallerId extends Component {
           Authorization: this.getSessionToken(),
         }
       }).then(resp => {
-        this.getCallerIdsHttpRequest();
+      this.getCallerIdsHttpRequest();
     }).catch(err => {
     });
   }
@@ -77,6 +77,7 @@ class CallerId extends Component {
           <td>{ci.id}</td>
           <td>{ci.code}</td>
           <td className="text-left">{ci.description}</td>
+          <td>{ci.user_id}</td>
           {this.renderCallerIdBadge(ci.is_activated)}
           <td className="text-center">
             <Button onClick={e => this.deleteCallerID(ci.id)} color="link"
@@ -93,9 +94,9 @@ class CallerId extends Component {
 
   renderCallerIdBadge(state) {
     if (state === 1) {
-      return <td><Badge color="success">Activated</Badge></td>
+      return <td><Badge color="success">Payment Success</Badge></td>
     } else {
-      return<td><Badge color="danger">Pending</Badge></td>
+      return <td><Badge color="danger">Payment Pending</Badge></td>
     }
   }
 
@@ -113,6 +114,7 @@ class CallerId extends Component {
                   <th scope="col">ID</th>
                   <th scope="col">Caller ID</th>
                   <th scope="col">Description</th>
+                  <th scope="col">User ID</th>
                   <th scope="col">Status</th>
                   <th scope="col">Configure</th>
                 </tr>

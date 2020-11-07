@@ -64,7 +64,7 @@ const routes = [
   {path: '/admin/users', name: 'System Users', component: AdminUsers},
   {path: '/admin/caller-id', name: 'System Caller IDs', component: CallerId},
 
-  {path: '/admin/test', name: 'System Caller IDs', component: Switches},
+  {path: '/admin/test', name: 'System Caller IDs', component: Tables},
 
 ];
 

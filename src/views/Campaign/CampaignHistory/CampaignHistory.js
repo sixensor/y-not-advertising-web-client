@@ -8,6 +8,7 @@ import Label from "reactstrap/lib/Label";
 import DatePicker from "reactstrap-date-picker";
 import './campain-history.css';
 import Alert from "reactstrap/lib/Alert";
+import Env from "../../Env/env";
 
 class CampaignHistory extends Component {
 
@@ -66,8 +67,7 @@ class CampaignHistory extends Component {
 
 
   callMessageRequests(fromDate, toDate) {
-    const messageRequestsUrl = "http://167.99.174.148:8001/api/v1.0/user/message-requests?from_date="
-      + fromDate + "&to_date=" + toDate;
+    const messageRequestsUrl = Env.getURL("/api/v1.0/user/message-requests?from_date=" + fromDate + "&to_date=" + toDate);
     axios.get(messageRequestsUrl,
       {
         headers: {
@@ -75,7 +75,7 @@ class CampaignHistory extends Component {
         }
       }).then(resp => {
       let campaigns = resp.data.map(x => x);
-      console.log(campaigns.length)
+      console.log(campaigns.length);
       if (campaigns.length === 0) {
         this.setState({
           campaigns: campaigns,
@@ -139,7 +139,7 @@ class CampaignHistory extends Component {
     })
     this.callMessageRequests(currentDateFormatted, currentDateFormatted)
   }
-  
+
   render() {
     let campaigns;
     if (this.state.campaigns !== undefined && this.state.campaigns !== null) {

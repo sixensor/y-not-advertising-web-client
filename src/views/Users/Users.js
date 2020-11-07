@@ -46,6 +46,7 @@ class Users extends Component {
 
 
   renderUserStatusBadge(isVerified, isRegistered) {
+    console.log(isVerified, isRegistered);
     if (isVerified === 1 && isRegistered === 1) {
       return (
         <section>
@@ -236,14 +237,14 @@ class Users extends Component {
       return name
     } else {
       return (
-        <table>
+        <table className="table-borderless">
           <tbody>
           <tr>
-            <td><strong>Id</strong></td>
+            <td><strong>User ID: </strong></td>
             <td>{this.state.user_data.id}</td>
           </tr>
           <tr>
-            <td><strong>Name</strong></td>
+            <td><strong>User Name: </strong></td>
             <td>{this.state.user_data.first_name} {this.state.user_data.last_name}</td>
           </tr>
           </tbody>
@@ -260,7 +261,7 @@ class Users extends Component {
           <td>{user.id}</td>
           <td>{user.first_name} {user.last_name}</td>
           <td className="text-left">{user.phone}</td>
-          <td>{this.renderUserStatusBadge(this.is_verified, this.is_registered)}</td>
+          <td>{this.renderUserStatusBadge(user.is_verified, user.is_registered)}</td>
           <td>{this.renderRoleBadge(user.role)}</td>
           <td><AppSwitch className={'mx-1'} variant={'pill'} color={'primary'}
                          name = "activeStatusToggle"
@@ -346,7 +347,7 @@ class Users extends Component {
         </Row>
 
         <Modal isOpen={this.state.is_active_cim} toggle={this.toggleCallerIdModel}
-               className={'modal-dark ' + this.props.className} centered>
+               className={'modal-lg ' + this.props.className} centered>
           <ModalBody>
             <h5 className="header-text">Manage Caller IDs</h5>
             <br/>
@@ -371,19 +372,22 @@ class Users extends Component {
             <h6 className="header-text"> Add Caller ID</h6>
             <Form onSubmit={e => this.addCallerIdFormSubmit(e)}>
               <FormGroup>
-                <Label>Call ID String</Label>
                 <Input type="text"
                        name="add_caller_id_string"
                        id="addCallerIdString"
+                       placeholder="Caller ID"
+                       size="sm"
                        onChange={e => this.onChange(e)} value={this.state.add_caller_id_string}/>
               </FormGroup>
               <FormGroup>
-                <Label>Description</Label>
                 <Input type="text"
                        name="add_caller_id_desc"
                        id="addCallerIdDesc"
+                       placeholder="Description"
+                       size="sm"
                        onChange={e => this.onChange(e)} value={this.state.add_caller_id_desc}/>
               </FormGroup>
+              <br/>
               <Button type="submit" color="dark" className="btn-sm">Add</Button>
             </Form>
           </ModalBody>

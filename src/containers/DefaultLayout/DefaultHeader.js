@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import {AppNavbarBrand, AppSidebarToggler} from '@coreui/react';
 import axios from "axios";
+import Env from "../../views/Env/env";
 
 const propTypes = {
   children: PropTypes.node,
@@ -57,7 +58,7 @@ class DefaultHeader extends Component {
     if (!session) {
       this.props.push("/login");
     }
-    const notificationUrl = 'http://167.99.174.148:8001/api/v1.0/user/notifications';
+    const notificationUrl = Env.getURL('/api/v1.0/user/notifications');
     axios.get(notificationUrl, {
       headers: {
         Authorization: 'Bearer ' + session.token,

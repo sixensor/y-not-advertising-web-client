@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import ModalHeader from "reactstrap/es/ModalHeader";
 import Badge from "reactstrap/es/Badge";
+import Env from "../Env/env";
 
 class Profile extends Component {
 
@@ -59,7 +60,7 @@ class Profile extends Component {
 
   // Initialize the components
   componentDidMount() {
-    let getUserUrl = "http://167.99.174.148:8001/api/v1.0/common/profile";
+    let getUserUrl = Env.getURL("/api/v1.0/common/profile");
     // get user details call
     axios.get(getUserUrl,
       {
@@ -117,7 +118,7 @@ class Profile extends Component {
 
   // Verify the user account using verification code
   verifyAccount(e) {
-    let verifyAccountUrl = 'http://167.99.174.148:8001/api/v1.0/user/profile/verify'
+    let verifyAccountUrl =  Env.getURL("/api/v1.0/user/profile/verify");
     axios.post(verifyAccountUrl, {
         code: this.state.pn_verification_code,
       },
@@ -144,9 +145,9 @@ class Profile extends Component {
     // Enable the verification code request button
     this.setState({
       is_enable_req_btn: false,
-    })
+    });
     // verification code request HTTP request
-    let verificationCodeRequestUrl = "http://167.99.174.148:8001/api/v1.0/user/profile/verification-request";
+    let verificationCodeRequestUrl = Env.getURL("/api/v1.0/user/profile/verification-request");
     axios.post(verificationCodeRequestUrl, null,
       {
         headers: {

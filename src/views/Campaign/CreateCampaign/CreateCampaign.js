@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import Spinner from "reactstrap/es/Spinner";
+import Env from "../../Env/env";
 
 
 class CreateCampaign extends Component {
@@ -35,7 +36,7 @@ class CreateCampaign extends Component {
 
   componentDidMount() {
     // caller id must call here
-    const userCallerIdUrl = "http://167.99.174.148:8001/api/v1.0/user/caller-ids";
+    const userCallerIdUrl = Env.getURL("/api/v1.0/user/caller-ids");
     axios.get(userCallerIdUrl,
       {
         headers: {
@@ -176,10 +177,9 @@ class CreateCampaign extends Component {
     }
   }
 
-
   // Submit create campaign
   createAndCheckoutCampaignSubmit(e) {
-    const createCampaignUrl = "http://167.99.174.148:8001/api/v1.0/user/message-request/checkout"
+    const createCampaignUrl = Env.getURL("/api/v1.0/user/message-request/checkout");
     e.preventDefault();
     axios.post(createCampaignUrl, {
       caller_id_id: Number(this.state.caller_id_id),
@@ -201,6 +201,7 @@ class CreateCampaign extends Component {
       // console.log(err.response)
     });
   }
+
   // Number list uploading using CSV File format
   render() {
     let caller_ids_elements;

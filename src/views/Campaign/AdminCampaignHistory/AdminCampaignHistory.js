@@ -9,6 +9,7 @@ import DatePicker from "reactstrap-date-picker";
 import Input from "reactstrap/lib/Input";
 import './admin-campain-history.css';
 import Alert from "reactstrap/lib/Alert";
+import Env from "../../Env/env";
 
 class AdminCampaignHistory extends Component {
 
@@ -67,8 +68,7 @@ class AdminCampaignHistory extends Component {
 
 
   callMessageRequests(fromDate, toDate) {
-    const messageRequestsUrl = "http://167.99.174.148:8001/api/v1.0/user/message-requests?from_date="
-      + fromDate + "&to_date=" + toDate;
+    const messageRequestsUrl = Env.getURL("/api/v1.0/user/message-requests?from_date=" + fromDate + "&to_date=" + toDate);
     axios.get(messageRequestsUrl,
       {
         headers: {
@@ -140,7 +140,7 @@ class AdminCampaignHistory extends Component {
     })
     this.callMessageRequests(currentDateFormatted, currentDateFormatted)
   }
-  
+
   render() {
     let campaigns;
     if (this.state.campaigns !== undefined && this.state.campaigns !== null) {
