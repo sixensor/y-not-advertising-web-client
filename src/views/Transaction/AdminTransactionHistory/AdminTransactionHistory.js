@@ -9,6 +9,7 @@ import DatePicker from "reactstrap-date-picker";
 import './admin-transaction-history.css';
 import Alert from "reactstrap/lib/Alert";
 import Table from "reactstrap/lib/Table";
+import Env from "../../Env/env";
 
 class AdminTransactionHistory extends Component {
 
@@ -67,8 +68,7 @@ class AdminTransactionHistory extends Component {
 
 
   callTransactions(fromDate, toDate) {
-    const userTransactionsUrl = "http://y-not.lk:8001/api/v1.0/admin/transactions?from_date="
-      + fromDate + "&to_date=" + toDate;
+    const userTransactionsUrl = Env.getURL( "/api/v1.0/admin/transactions?from_date=" + fromDate + "&to_date=" + toDate);
     axios.get(userTransactionsUrl,
       {
         headers: {
