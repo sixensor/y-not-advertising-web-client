@@ -63,7 +63,7 @@ function IndexNavbar() {
           <NavLink
             className="header-text"
             data-placement="bottom"
-            href=""
+            href="https://www.facebook.com/Y-not-Advertising-523968557626926"
             target="_blank"
             title="Like us on Facebook"
           >
@@ -71,13 +71,15 @@ function IndexNavbar() {
           </NavLink>
         </NavItem>
         <NavItem>
-          <Button
-            className="btn-round header-text"
-            color=""
-            href="/dasboard"
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
+            href="/dashboard"
+            target="_blank"
+            title="Go to dashboard"
           >
             Dashboard
-          </Button>
+          </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
@@ -119,9 +121,9 @@ function IndexNavbar() {
       <>
         <NavItem>
           <NavLink
-            className="content-text"
+            className="header-text"
             data-placement="bottom"
-            href=""
+            href="https://www.facebook.com/Y-not-Advertising-523968557626926"
             target="_blank"
             title="Like us on Facebook"
           >
@@ -129,22 +131,26 @@ function IndexNavbar() {
           </NavLink>
         </NavItem>
         <NavItem>
-          <Button
-            className="btn-round content-text"
-            color=""
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
             href="/login"
+            target="_blank"
+            title="Login to platform"
           >
             Login
-          </Button>
+          </NavLink>
         </NavItem>
         <NavItem>
-          <Button
-            className="btn-round primary content-text"
-            color=""
+          <NavLink
+            className="header-text"
+            data-placement="bottom"
             href="/register"
+            target="_blank"
+            title="Register to platform"
           >
             Register
-          </Button>
+          </NavLink>
         </NavItem>
         <NavItem>
           <NavLink

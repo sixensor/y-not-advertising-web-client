@@ -12,6 +12,7 @@ import "rc-steps/assets/index.css";
 import "rc-steps/assets/iconfont.css";
 import "./index.css"
 import {PricingDetail, PricingSlot, PricingTable} from 'react-pricing-table';
+import {Link} from "react-router-dom";
 
 // styles
 
@@ -38,7 +39,7 @@ class Index extends Component {
                   </p>
                   <br/>
                   <Button
-                    className="btn-round"
+                    className="btn-sm header-text"
                     color="default"
                     href="/services"
                     onClick={e => e.preventDefault()}
@@ -59,7 +60,7 @@ class Index extends Component {
                   </p>
                   <br/>
                   <Button
-                    className="btn-round header-text"
+                    className="btn-sm header-text"
                     color="default"
                     href="/about-us"
                     onClick={e => e.preventDefault()}
@@ -138,25 +139,8 @@ class Index extends Component {
           {/*  </Container>*/}
           {/*</div>*/}
           <div className="section text-center text-center">
-            <h2 className="title header-text">Price Plans</h2>
-            <Container>
-              <Row>
-                <Col md="3"></Col>
-                <Col className="wrapper" md="6">
-                    <div className="plan">
-                      <header><i className="ion-ios-navigate-outline"></i>
-                        <h4 className="plan-title">Starter</h4>
-                        <div className="plan-cost"><span className="plan-price">Rs 1299/-</span><span
-                          className="plan-type">for Registration</span></div>
-                      </header>
-                      <ul className="plan-features">
-                        <li>Rs 0.99 per message</li>
-                        <li>Rs 299 for new Caller ID (*caller id must be available)</li>
-                      </ul>
-                      <div className="plan-select"><a href="/register">Register Now</a></div>
-                    </div>
-                </Col>
-              </Row>
+            <Container fluid>
+                  <img alt="..."  className="img-fluid" src={require("../../assets/img/ynot/banner_1.png")}/>
             </Container>
           </div>
           <DemoFooter/>
