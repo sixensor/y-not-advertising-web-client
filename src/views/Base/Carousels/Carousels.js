@@ -77,18 +77,17 @@ class Carousels extends Component {
           <div
             className="page-header section-dark"
             style={{
-              backgroundImage:
-                "url(" + item.src + ")",
-              msScrollbarArrowColor:'#6610f2'
+              backgroundImage: "url(" + item.src + ")",
+              msScrollbarArrowColor:'#6610f2',
             }}
           >0
             <div className="filter"/>
             <div className="content-center">
               <Container>
                 <div className="title-brand">
-                  <h1 className="main-slider-text">
+                  <p className="main-slider-text">
                     {item.title}
-                  </h1>
+                  </p>
                 </div>
                 <h2 className="presentation-subtitle text-center">
                 </h2>

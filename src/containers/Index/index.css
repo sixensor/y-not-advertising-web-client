@@ -105,6 +105,12 @@
 .wrapper .featured .plan-select a {
   margin: 30px 20px;
 }
+
+.main-slider-text{
+  font-size: 64px;
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif !important;
+}
 /*@media only screen and (max-width: 767px) {*/
 /*  .wrapper .plan {*/
 /*    width: 50%;*/
