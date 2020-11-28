@@ -32,9 +32,9 @@ class DefaultHeader extends Component {
     if (!session) {
       this.props.push("/login");
     }
-    let imageUrl = "http://167.99.174.148:8003/file?name=" + session.user.profile_image;
+    let imageUrl = "http://localhost:8003/file?name=" + session.user.profile_image;
     if (session.user.profile_image === '') {
-      imageUrl = "http://167.99.174.148:8003/file?name=default_profile_pic.png";
+      imageUrl = "http://localhost:8003/file?name=default_profile_pic.png";
     }
 
     this.setState(
@@ -91,7 +91,7 @@ class DefaultHeader extends Component {
         <AppSidebarToggler className="d-lg-none " display="md" mobile/>
         <AppNavbarBrand>
           <Link to="/home">
-            <img alt="..." className="img-fluid" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
+            <img alt="..." height="30" className="img-details" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
           </Link>
         </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg"/>

@@ -49,7 +49,6 @@ const AdminUsers = React.lazy(() => import('./views/Users/Users'));
 const AdminCallerIds = React.lazy(() => import('./views/CallerId/CallerId'));
 
 const routes = [
-
   // Custom routes
   {path: '/campaign/create', name: 'Create a Campaign', component: CreateCampaign},
   {path: '/campaign/history', name: 'Campaign History', component: CampaignHistory},
@@ -63,9 +62,7 @@ const routes = [
   {path: '/admin/campaigns', name: 'System Campaigns', component: AdminCampaignHistory},
   {path: '/admin/users', name: 'System Users', component: AdminUsers},
   {path: '/admin/caller-id', name: 'System Caller IDs', component: CallerId},
-
-  {path: '/admin/test', name: 'System Caller IDs', component: Tables},
-
+  {path: '/admin/test', name: 'System Caller IDs', component: Colors},
 ];
 
 export default routes;

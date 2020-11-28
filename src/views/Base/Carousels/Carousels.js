@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Carousel, CarouselControl, CarouselIndicators, CarouselItem, Container} from 'reactstrap';
 import caroImage1 from '../../../assets/img/ynot/caro1.jpg'
-import caroImage2 from '../../../assets/img/ynot/caro2.png'
+import caroImage2 from '../../../assets/img/ynot/caro2.jpg'
 import caroImage3 from '../../../assets/img/ynot/caro3.jpg'
 
 const items = [
@@ -78,7 +78,8 @@ class Carousels extends Component {
             className="page-header section-dark"
             style={{
               backgroundImage:
-                "url(" + item.src + ")"
+                "url(" + item.src + ")",
+              msScrollbarArrowColor:'#6610f2'
             }}
           >0
             <div className="filter"/>

@@ -20,6 +20,8 @@ const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 const Auth = React.lazy(() => import('./auth/Auth'))
 
 
+
+
 class App extends Component {
 
   render() {

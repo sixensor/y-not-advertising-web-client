@@ -61,12 +61,22 @@ class CampaignHistory extends Component {
   }
 
   componentDidMount() {
-    // caller id must call here
-    this.callMessageRequests(this.state.from_date, this.state.to_date)
+    this.getMessageRequestHttpRequest(this.state.from_date, this.state.to_date)
   }
 
+  sendButtonOnClick(e,id) {
+    this.sendMessageRequestHttpRequest(id)
+  }
 
-  callMessageRequests(fromDate, toDate) {
+  payNowButtonOnClick(e,id) {
+    this.reCheckoutMessageRequestHttpRequest(id)
+  }
+
+  getInvoiceButtonOnClick(e) {
+
+  }
+
+  getMessageRequestHttpRequest(fromDate, toDate) {
     const messageRequestsUrl = Env.getURL("/api/v1.0/user/message-requests?from_date=" + fromDate + "&to_date=" + toDate);
     axios.get(messageRequestsUrl,
       {
@@ -75,7 +85,6 @@ class CampaignHistory extends Component {
         }
       }).then(resp => {
       let campaigns = resp.data.map(x => x);
-      console.log(campaigns.length);
       if (campaigns.length === 0) {
         this.setState({
           campaigns: campaigns,
@@ -91,15 +100,51 @@ class CampaignHistory extends Component {
     });
   }
 
-  getConfigurationButton(isTransactionCompleted, isMessageSend) {
-    if (isTransactionCompleted === 0) {
+  reCheckoutMessageRequestHttpRequest(messageRequestId) {
+    const reCheckoutMessageRequestUrl = Env.getURL("/api/v1.0/user/message-request/recheckout");
+    axios.post(reCheckoutMessageRequestUrl,
+      {
+        message_request_id: Number(messageRequestId),
+      },
+      {
+        headers: {
+          Authorization: this.getBearerToken(),
+        }
+      }).then(resp => {
+      console.log(resp.data);
+      localStorage.setItem("CampaignProcessedData", JSON.stringify(resp.data));
+      this.props.history.push('/campaign/pay')
+    }).catch(err => {
+      console.log(err)
+    });
+  }
+
+  sendMessageRequestHttpRequest(messageRequestId){
+    const sendMessageRequestURL = Env.getURL("/api/v1.0/user/message-request/send");
+    axios.post(sendMessageRequestURL,
+      {
+        message_request_id: Number(messageRequestId),
+      },
+      {
+        headers: {
+          Authorization: this.getBearerToken(),
+        }
+      }).then(resp => {
+      this.getMessageRequestHttpRequest()
+    }).catch(err => {
+      console.log(err)
+    });
+  }
+
+  getConfigurationButton(id,isTransactionCompleted, isMessageSend) {
+    if (isTransactionCompleted !== 0 && isMessageSend === 0) {
       return (
-        <Button className="btn-danger btn-sm header-text">Send</Button>
+        <Button className="btn-danger btn-sm header-text" onClick={e=>this.sendButtonOnClick(e,id)} >Send</Button>
       )
     }
-    if (isMessageSend === 0) {
+    if (isTransactionCompleted === 0) {
       return (
-        <Button className="btn-warning btn-sm header-text">Pay Now</Button>
+        <Button className="btn-warning btn-sm header-text" onClick={e=>this.payNowButtonOnClick(e,id)}>Pay Now</Button>
       )
     }
     return (
@@ -120,15 +165,15 @@ class CampaignHistory extends Component {
   handleFromDateChange(value, formattedValue) {
     this.setState({
       from_date: this.formatDate(value),
-    })
-    this.callMessageRequests(this.formatDate(value), this.state.to_date)
+    });
+    this.getMessageRequestHttpRequest(this.formatDate(value), this.state.to_date);
   }
 
   handleToDateChange(value, formattedValue) {
     this.setState({
       to_date: this.formatDate(value),
-    })
-    this.callMessageRequests(this.state.from_date, this.formatDate(value))
+    });
+    this.getMessageRequestHttpRequest(this.state.from_date, this.formatDate(value));
   }
 
   resetFilter(e) {
@@ -136,8 +181,8 @@ class CampaignHistory extends Component {
     this.setState({
       to_date: currentDateFormatted,
       from_date: currentDateFormatted,
-    })
-    this.callMessageRequests(currentDateFormatted, currentDateFormatted)
+    });
+    this.getMessageRequestHttpRequest(currentDateFormatted, currentDateFormatted)
   }
 
   render() {
@@ -150,7 +195,7 @@ class CampaignHistory extends Component {
           <td className="text-left">{item.content}</td>
           <td>{item.input_format}</td>
           <td>{this.formatDateTime(item.created_data)}</td>
-          <td>{this.getConfigurationButton(item.is_transaction_completed, item.is_message_send)}</td>
+          <td>{this.getConfigurationButton(item.id,item.is_transaction_completed, item.is_message_send)}</td>
         </tr>
       );
     } else {

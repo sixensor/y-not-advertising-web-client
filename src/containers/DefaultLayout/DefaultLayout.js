@@ -48,6 +48,20 @@ class DefaultLayout extends Component {
   }
 
 
+  renderLandingPage() {
+    let session = JSON.parse(localStorage.getItem('Session'));
+    console.log(session)
+    if (session === null){
+      return (<Redirect from="/" to="/home"/>)
+    }
+    if (session.user.role === 2) {
+      return (<Redirect from="/" to="/admin/users"/>)
+    } else {
+      return (<Redirect from="/" to="/dashboard"/>)
+    }
+  }
+
+
   render() {
     return (
       <div className="app">
@@ -75,6 +89,7 @@ class DefaultLayout extends Component {
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
+
                     return route.component ? (
                       <Route
                         key={idx}
@@ -86,7 +101,7 @@ class DefaultLayout extends Component {
                         )}/>
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard"/>
+                  {this.renderLandingPage()}
                 </Switch>
               </Suspense>
             </Container>

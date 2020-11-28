@@ -35,40 +35,36 @@
 
 
 body {
-//     font-family: 'Open Sans', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-size:14px;
+ font-family: 'Open Sans', sans-serif !important;
 }
 
 .content-text{
-  font-family: 'Nunito', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 .header-text{
   font-weight: bold;
-  /*font-family: 'Kanit', sans-serif !important;*/
-  font-family: 'Montserrat', sans-serif;
+ font-family: 'Montserrat', sans-serif !important;
 }
 .page-header-text{
   font-weight: bold;
-  /*font-family: 'Kanit', sans-serif !important;*/
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 
 
 h1,h2,h3,h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .nav-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 .dropdown-header{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .card-header{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .dashboard-bottom{
@@ -76,5 +72,7 @@ font-size:11px;
 }
 
 label{
-font-family: 'Montserrat', sans-serif;
+ font-family: 'Montserrat', sans-serif !important;
 }
+
+
