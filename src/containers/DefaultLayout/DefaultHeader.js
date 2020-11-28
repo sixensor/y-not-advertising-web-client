@@ -32,9 +32,9 @@ class DefaultHeader extends Component {
     if (!session) {
       this.props.push("/login");
     }
-    let imageUrl = "http://localhost:8003/file?name=" + session.user.profile_image;
+    let imageUrl = Env.getStaticURL( "/file?name=" + session.user.profile_image);
     if (session.user.profile_image === '') {
-      imageUrl = "http://localhost:8003/file?name=default_profile_pic.png";
+      imageUrl =Env.getStaticURL( "/file?name=default_profile_pic.png");
     }
 
     this.setState(
