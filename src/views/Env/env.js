@@ -2,8 +2,8 @@ import React from 'react';
 
 
 
-// const ServerURL = "http://167.99.174.148";// Production server
-const ServerURL = "http://127.0.0.1"; // Local host
+ const ServerURL = "http://167.99.174.148";// Production server
+//const ServerURL = "http://127.0.0.1"; // Local host
 
 
 class Env {
