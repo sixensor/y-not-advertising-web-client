@@ -23,7 +23,7 @@ class DefaultHeader extends Component {
       first_name: '',
       last_name: '',
       notification_list: undefined,
-      notification_count:''
+      notification_count: ''
     }
   }
 
@@ -32,9 +32,9 @@ class DefaultHeader extends Component {
     if (!session) {
       this.props.push("/login");
     }
-    let imageUrl = Env.getStaticURL( "/file?name=" + session.user.profile_image);
+    let imageUrl = Env.getStaticURL("/file?name=" + session.user.profile_image);
     if (session.user.profile_image === '') {
-      imageUrl =Env.getStaticURL( "/file?name=default_profile_pic.png");
+      imageUrl = Env.getStaticURL("/file?name=default_profile_pic.png");
     }
 
     this.setState(
@@ -50,15 +50,16 @@ class DefaultHeader extends Component {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
   // Notifications view on bell icon and set notification list
   // to dropdown menu.
   notificationList() {
-    this.sleep(5000)
+    this.sleep(5000);
     let session = JSON.parse(localStorage.getItem("Session"));
     if (!session) {
       this.props.push("/login");
     }
-    const notificationUrl = Env.getURL('/api/v1.0/user/notifications');
+    const notificationUrl = Env.getURL('/api/v1.0/common/notifications');
     axios.get(notificationUrl, {
       headers: {
         Authorization: 'Bearer ' + session.token,
@@ -67,7 +68,7 @@ class DefaultHeader extends Component {
       this.setState(
         {
           notification_list: resp.data.map(x => x),
-          notification_count:resp.data.length
+          notification_count: resp.data.length
         }
       )
     }).catch(err => {
@@ -75,14 +76,38 @@ class DefaultHeader extends Component {
     });
   }
 
+  //[{"id":1,"description":"Please register your account, Go to Profile","type":"user_registration"},{"id":9,"description":"Your requested caller ID (Sigzag) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":10,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":11,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":12,"description":"Your requested caller ID () has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":13,"description":"Your requested caller ID (My Shop) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":14,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":15,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"}]
+  notification(data) {
+
+
+    if (data.type === "user_registration") {
+      return (
+        <DropdownItem>
+          Click Here to register user
+        </DropdownItem>
+      )
+    } else if (data.type === "caller_id_activation") {
+      return (
+        <DropdownItem>
+          Click Here to activate <b>{data.description}</b>
+        </DropdownItem>
+      )
+    } else {
+      return (<span/>)
+    }
+  }
 
   render() {
     const {children, ...attributes} = this.props;
 
-    let dropDownNotifications = '';
+    let dropDownNotifications = (
+      <DropdownItem disabled>
+        No notifications
+      </DropdownItem>
+    );
     if (this.state.notification_list !== undefined && this.state.notification_list !== null) {
       dropDownNotifications = this.state.notification_list.map(item =>
-        <DropdownItem tag="div" className="text-center">{item.description}</DropdownItem>
+        <section>{this.notification(item)}</section>
       );
     }
 
@@ -91,7 +116,8 @@ class DefaultHeader extends Component {
         <AppSidebarToggler className="d-lg-none " display="md" mobile/>
         <AppNavbarBrand>
           <Link to="/home">
-            <img alt="..." height="30" className="img-details" src={require("../../assets/img/ynot/logo-home-dark.png")}/>
+            <img alt="..." height="30" className="img-details"
+                 src={require("../../assets/img/ynot/logo-home-dark.png")}/>
           </Link>
         </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg"/>
@@ -106,20 +132,19 @@ class DefaultHeader extends Component {
             <DropdownToggle nav>
               <i className="icon-bell"></i><Badge pill color="danger">{this.state.notification_count}</Badge>
             </DropdownToggle>
-            <DropdownMenu right>
+            <DropdownMenu flip={true} right>
               {dropDownNotifications}
             </DropdownMenu>
           </UncontrolledDropdown>
           <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
-              <img src={this.state.image_url} className="img-avatar"
-                   alt="profile image"/>
+              <i className="cui-settings"/>
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
               <DropdownItem onClick={e => this.props.openProfile(e)}>
                 <i className="fa fa-user"/> Profile</DropdownItem>
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock" /> Logout</DropdownItem>
+              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"/> Logout</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>

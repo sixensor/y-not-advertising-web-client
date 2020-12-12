@@ -89,7 +89,6 @@ class DefaultLayout extends Component {
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
-
                     return route.component ? (
                       <Route
                         key={idx}

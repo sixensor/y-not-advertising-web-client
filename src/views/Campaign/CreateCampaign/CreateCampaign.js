@@ -120,9 +120,9 @@ class CreateCampaign extends Component {
   uploadCSV(e) {
     this.setState({
       is_show_file_upload_spinner: true
-    })
+    });
     // Upload URL
-    const uploadUrl = "http://167.99.174.148:8003/auth/upload";
+    const uploadUrl = Env.getStaticURL("/auth/upload");
     // Upload file to server
     const data = new FormData();
     const file = e.target.files[0];
