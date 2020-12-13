@@ -108,9 +108,6 @@ class CampaignPayment extends Component {
                   <Input type="hidden" name="cancel_url" value={Env.redirectTo("/campaign/history#")}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="cancel_url" value={Env.redirectTo("/campaign/history#")}/>
-                </FormGroup>
-                <FormGroup>
                   <Input type="hidden" name="custom_1" value={this.state.transaction_id}/>
                 </FormGroup>
                 <FormGroup>
