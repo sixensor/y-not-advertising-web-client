@@ -9,6 +9,7 @@ import FormGroup from "reactstrap/es/FormGroup";
 import Input from "reactstrap/lib/Input";
 import Label from "reactstrap/es/Label";
 import Button from "reactstrap/lib/Button";
+import Env from "../../Env/env";
 
 class CampaignPayment extends Component {
   constructor(props) {
@@ -98,13 +99,13 @@ class CampaignPayment extends Component {
                   <Input type="hidden" name="merchant_id" value="1213806"/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="notify_url" value="http://167.99.174.148:8001/api/v1.0/payhere/notify"/>
+                  <Input type="hidden" name="notify_url" value={Env.getURL("/api/v1.0/payhere/notify")}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="return_url" value="http://167.99.174.148"/>
+                  <Input type="hidden" name="return_url" value={Env.redirectTo("/campaign/history")}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="cancel_url" value="http://167.99.174.148"/>
+                  <Input type="hidden" name="cancel_url" value={Env.redirectTo("/campaign/history#")}/>
                 </FormGroup>
 
                 {/*Visible variables*/}
