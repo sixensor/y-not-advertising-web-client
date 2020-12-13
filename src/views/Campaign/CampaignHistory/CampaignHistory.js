@@ -136,7 +136,7 @@ class CampaignHistory extends Component {
     });
   }
 
-  getConfigurationButton(id,isTransactionCompleted, isMessageSend) {
+  getConfigurationButton(id,isTransactionCompleted, isMessageSend,invoiceName) {
     if (isTransactionCompleted !== 0 && isMessageSend === 0) {
       return (
         <Button className="btn-danger btn-sm header-text" onClick={e=>this.sendButtonOnClick(e,id)} >Send</Button>
@@ -148,7 +148,7 @@ class CampaignHistory extends Component {
       )
     }
     return (
-      <Button className="btn-success btn-sm header-text">Get Invoice</Button>
+      <Button href={Env.getStaticURL("/file?name="+invoiceName)} className="btn-success btn-sm header-text">Get Invoice</Button>
     )
   }
 
@@ -195,7 +195,7 @@ class CampaignHistory extends Component {
           <td className="text-left">{item.content}</td>
           <td>{item.input_format}</td>
           <td>{this.formatDateTime(item.created_data)}</td>
-          <td>{this.getConfigurationButton(item.id,item.is_transaction_completed, item.is_message_send)}</td>
+          <td>{this.getConfigurationButton(item.id,item.is_transaction_completed, item.is_message_send,item.invoice_name)}</td>
         </tr>
       );
     } else {
