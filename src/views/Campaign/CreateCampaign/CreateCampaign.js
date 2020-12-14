@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import FormText from "reactstrap/es/FormText";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -220,6 +220,9 @@ class CreateCampaign extends Component {
             <MessengerCustomerChat
               pageId="523968557626926"
               appId="316347486158151"
+              themeColor="#6f42c1"
+              loggedInGreeting="Hello Loging Greeting"
+              loggedOutGreeting="Hello Logout Greeting"
             />
             <Card>
               <CardHeader>
