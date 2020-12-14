@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import {Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import FormText from "reactstrap/es/FormText";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import Spinner from "reactstrap/es/Spinner";
 import Env from "../../Env/env";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 
 class CreateCampaign extends Component {
@@ -126,7 +127,7 @@ class CreateCampaign extends Component {
     // Upload file to server
     const data = new FormData();
     const file = e.target.files[0];
-    data.append('file', file)
+    data.append('file', file);
     axios.post(uploadUrl, data, {
       headers: {
         Authorization: this.getBearerToken(),
@@ -216,6 +217,10 @@ class CreateCampaign extends Component {
           <Col lg="3">
           </Col>
           <Col lg="6">
+            <MessengerCustomerChat
+              pageId="523968557626926"
+              appId="316347486158151"
+            />
             <Card>
               <CardHeader>
                 <strong>Create Campaign</strong>
