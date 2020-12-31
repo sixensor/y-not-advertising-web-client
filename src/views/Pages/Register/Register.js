@@ -65,13 +65,13 @@ class Register extends Component {
     const loginUrl = Env.getURL("/api/v1.0/register");
     e.preventDefault();
 
-    const { password } = this.state;
-    const re = new RegExp("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
-    const isOk = re.test(password);
-    if (!isOk) {
-      alert("The password is not strong enough.");
-      return
-    }
+    // const { password } = this.state;
+    // const re = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
+    // const isOk = re.test(password);
+    // if (!isOk) {
+    //   alert("The password is not strong enough.");
+    //   return
+    // }
 
     axios.post(loginUrl, {
       first_name: this.state.first_name,
@@ -232,7 +232,8 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" name="password" placeholder="Password" onChange={e => this.onChange(e)}
+                      <Input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                             onChange={e => this.onChange(e)}
                              value={this.state.password} required/>
                     </InputGroup>
                     <InputGroup className="mb-4">
