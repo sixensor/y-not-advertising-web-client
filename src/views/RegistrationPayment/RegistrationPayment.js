@@ -17,7 +17,7 @@ class RegistrationPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message_request_id: 0,
+      id: 0,
       transaction_id: 0,
       description: '',
       currency: '',
@@ -59,6 +59,7 @@ class RegistrationPayment extends Component {
     let processedData = JSON.parse(localStorage.getItem('RegistrationPayment'));
     // console.log(processedData)
     this.setState({
+      id:processedData.id,
       transaction_id: processedData.transaction_id,
       description: processedData.description,
       currency: "LKR",
@@ -130,10 +131,20 @@ class RegistrationPayment extends Component {
                 <FormGroup>
                   <Input type="hidden" name="custom_2" value={this.state.message_request_id}/>
                 </FormGroup>
+                <FormGroup>
+                  <Input type="hidden" name="custom_2" value={this.state.message_request_id}/>
+                </FormGroup>
 
                 {/*Visible variables*/}
                 <Row>
-                  <Col md={12}>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label for="order_id">Id</Label>
+                      <Input type="text" id="order_id"
+                             name="order_id" value={this.state.id} readonly="readonly" />
+                    </FormGroup>
+                  </Col>
+                  <Col md={6}>
                     <FormGroup>
                       <Label for="items">Description</Label>
                       <Input type="text" id="items"
