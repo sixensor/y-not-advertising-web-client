@@ -21,7 +21,7 @@ class RegistrationPayment extends Component {
       transaction_id: 0,
       description: '',
       currency: '',
-      items: undefined,
+      items: {},
       total: '',
       date: '',
       customer: {
@@ -63,7 +63,7 @@ class RegistrationPayment extends Component {
       transaction_id: processedData.transaction_id,
       description: processedData.description,
       currency: "LKR",
-      items: undefined,
+      items: {},
       total: processedData.total,
       date: processedData.date,
       customer: {
@@ -127,9 +127,6 @@ class RegistrationPayment extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Input type="hidden" name="custom_1" value={this.state.transaction_id}/>
-                </FormGroup>
-                <FormGroup>
-                  <Input type="hidden" name="custom_2" value={this.state.message_request_id}/>
                 </FormGroup>
                 <FormGroup>
                   <Input type="hidden" name="custom_2" value={this.state.message_request_id}/>

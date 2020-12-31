@@ -16,7 +16,7 @@ class CallerIdPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message_request_id: 0,
+      id: 0,
       transaction_id: 0,
       description: '',
       currency: '',
@@ -79,10 +79,11 @@ class CallerIdPayment extends Component {
     //   "total":"3000.00"
     // }
     this.setState({
+      id: processedData.id,
       transaction_id: processedData.transaction_id,
       description: processedData.description,
       currency: "LKR",
-      items: undefined,
+      items: {},
       total: processedData.total,
       date: today,
       customer: {
@@ -153,13 +154,13 @@ class CallerIdPayment extends Component {
 
                 {/*Visible variables*/}
                 <Row>
-                  {/*<Col md={6}>*/}
-                  {/*  <FormGroup>*/}
-                  {/*    <Label for="order_id">Campaign Id</Label>*/}
-                  {/*    <Input type="text" id="order_id"*/}
-                  {/*           name="order_id" value={this.state.message_request_id} readonly="readonly"/>*/}
-                  {/*  </FormGroup>*/}
-                  {/*</Col>*/}
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label for="order_id">Id</Label>
+                      <Input type="text" id="order_id"
+                             name="order_id" value={this.state.id} readonly="readonly"/>
+                    </FormGroup>
+                  </Col>
                   <Col md={12}>
                     <FormGroup>
                       <Label for="items">Description</Label>
