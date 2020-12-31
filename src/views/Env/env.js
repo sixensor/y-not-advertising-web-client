@@ -2,9 +2,9 @@ import React from 'react';
 
 
 
-  // const ServerURL = "http://ynotadvertising.com";// Production server
-const ServerURL = "http://127.0.0.1"; // Local host
-const ServerDNSURL = "http://localhost"; // Local host
+  const ServerURL = "http://ynotadvertising.com";// Production server
+// const ServerURL = "http://127.0.0.1"; // Local host
+// const ServerDNSURL = "http://localhost"; // Local host
 
 class Env {
 
