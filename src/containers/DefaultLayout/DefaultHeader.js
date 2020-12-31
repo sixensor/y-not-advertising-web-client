@@ -76,19 +76,56 @@ class DefaultHeader extends Component {
     });
   }
 
+  // Get current session bearer token
+  getBearerToken() {
+    let session = JSON.parse(localStorage.getItem('Session'));
+    if (!session) {
+      this.props.history.push('/login');
+    }
+    return 'Bearer ' + session.token
+  }
+
+  processRegistrationPayment(e) {
+    e.preventDefault();
+    const registrationProcessUrl = Env.getURL("/api/v1.0/user/payment/process-registration");
+    axios.post(registrationProcessUrl, {}, {
+      headers: {
+        Authorization: this.getBearerToken(),
+      }
+    }).then(resp => {
+      console.log(resp.data);
+      localStorage.setItem("RegistrationPayment", JSON.stringify(resp.data));
+      this.props.processRegPayment(e)
+    }).catch(err => {
+    });
+  }
+
+
+  processCallerIDPayment(e,id) {
+    e.preventDefault();
+    const registrationProcessUrl = Env.getURL("/api/v1.0/user/payment/caller-id/"+id);
+    axios.post(registrationProcessUrl, {}, {
+      headers: {
+        Authorization: this.getBearerToken(),
+      }
+    }).then(resp => {
+      console.log(resp.data);
+      localStorage.setItem("CallerIdProcessedData", JSON.stringify(resp.data));
+      this.props.processCallerIDPayment(e)
+    }).catch(err => {
+    });
+  }
   //[{"id":1,"description":"Please register your account, Go to Profile","type":"user_registration"},{"id":9,"description":"Your requested caller ID (Sigzag) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":10,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":11,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":12,"description":"Your requested caller ID () has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":13,"description":"Your requested caller ID (My Shop) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":14,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"},{"id":15,"description":"Your requested caller ID (Test) has been approved, Please process your payment to activate !","type":"caller_id_activation"}]
   notification(data) {
-
-
     if (data.type === "user_registration") {
       return (
-        <DropdownItem>
+        <DropdownItem onClick={e => this.processRegistrationPayment(e)}>
           Click Here to register user
         </DropdownItem>
       )
     } else if (data.type === "caller_id_activation") {
       return (
-        <DropdownItem>
+        <DropdownItem onClick={e => this.processCallerIDPayment(e,data.id)}>
           Click Here to activate <b>{data.description}</b>
         </DropdownItem>
       )

@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import Spinner from "reactstrap/es/Spinner";
 import Env from "../../Env/env";
 import MessengerCustomerChat from "react-messenger-customer-chat";
+import Popover from "reactstrap/es/Popover";
+import PopoverBody from "reactstrap/es/PopoverBody";
 
 
 class CreateCampaign extends Component {
@@ -67,7 +69,6 @@ class CreateCampaign extends Component {
       scheduled_date: date
     });
   };
-
 
   // Date Picker
   // Show and hide and date Picker
@@ -195,7 +196,7 @@ class CreateCampaign extends Component {
         Authorization: this.getBearerToken(),
       }
     }).then(resp => {
-      console.log(resp.data)
+      console.log(resp.data);
       localStorage.setItem("CampaignProcessedData", JSON.stringify(resp.data));
       this.props.history.push('/campaign/pay')
     }).catch(err => {
@@ -217,13 +218,20 @@ class CreateCampaign extends Component {
           <Col lg="3">
           </Col>
           <Col lg="6">
-            <MessengerCustomerChat
-              pageId="523968557626926"
-              appId="316347486158151"
-              themeColor="#6f42c1"
-              loggedInGreeting="Hello Loging Greeting"
-              loggedOutGreeting="Hello Logout Greeting"
-            />
+            <div>
+              {/*<Popover placement="top" isOpen={true} target="Popover">*/}
+              {/*  <PopoverBody>*/}
+              {/*    <h4>Send Message to request a Caller ID</h4>*/}
+              {/*  </PopoverBody>*/}
+              {/*</Popover>*/}
+              <MessengerCustomerChat
+                pageId="523968557626926"
+                appId="316347486158151"
+                themeColor="#6f42c1"
+                loggedInGreeting="Chat with us"
+                loggedOutGreeting="Thank you contacting Y not Advertising"
+              />
+            </div>
             <Card>
               <CardHeader>
                 <strong>Create Campaign</strong>

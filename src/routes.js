@@ -44,9 +44,12 @@ const PayForCampaign = React.lazy(() => import('./views/Campaign/CampaignPayment
 const Profile = React.lazy(() => import('./views/Profile/Profile'));
 const UserTransactionHistory = React.lazy(() => import('./views/Transaction/TransactionHistory'));
 const AdminTransactionHistory = React.lazy(() => import('./views/Transaction/AdminTransactionHistory'));
-const AdminCampaignHistory = React.lazy(()=>import('./views/Campaign/AdminCampaignHistory'))
+const AdminCampaignHistory = React.lazy(() => import('./views/Campaign/AdminCampaignHistory'))
 const AdminUsers = React.lazy(() => import('./views/Users/Users'));
 const AdminCallerIds = React.lazy(() => import('./views/CallerId/CallerId'));
+const RegistrationPayment = React.lazy(() => import('./views/RegistrationPayment/RegistrationPayment'));
+const CallerIDPayment = React.lazy(() => import('./views/CallerIdPayment/CallerIdPayment'));
+
 
 const routes = [
   // Custom routes
@@ -57,12 +60,15 @@ const routes = [
   {path: '/profile', name: 'Profile', component: Profile},
   {path: '/transaction/history', name: 'Transaction History', component: UserTransactionHistory},
 
+  {path: '/register/pay', name: 'Pay for Registration', component: RegistrationPayment},
+  {path: '/caller-id/pay', name: 'Pay for Caller ID', component: CallerIDPayment},
+
   // Admin panel pages
   {path: '/admin/transactions', name: 'System Transactions', component: AdminTransactionHistory},
   {path: '/admin/campaigns', name: 'System Campaigns', component: AdminCampaignHistory},
   {path: '/admin/users', name: 'System Users', component: AdminUsers},
   {path: '/admin/caller-id', name: 'System Caller IDs', component: CallerId},
-  {path: '/test', name: 'System Caller IDs', component:Dropdowns },
+  {path: '/test', name: 'System Caller IDs', component: Dropdowns},
 ];
 
 export default routes;

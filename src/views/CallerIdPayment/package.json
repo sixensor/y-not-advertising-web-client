@@ -1,0 +1,6 @@
+{
+  "name": "RegistrationPayment",
+  "version": "0.0.0",
+  "private": true,
+  "main": "CallerIdPayment.js"
+}

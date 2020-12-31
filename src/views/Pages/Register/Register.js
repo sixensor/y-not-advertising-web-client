@@ -20,7 +20,6 @@ import ModalHeader from "reactstrap/es/ModalHeader";
 import '../../../assets/dashboard-scss/style.scss'
 import {Link} from "react-router-dom";
 import {ReCAPTCHA} from "react-google-recaptcha";
-import Label from "reactstrap/lib/Label";
 import FormGroup from "reactstrap/lib/FormGroup";
 import Env from "../../Env/env";
 
@@ -44,7 +43,7 @@ class Register extends Component {
       country: '',
       err_status: false,
       err_message: '',
-      enable_submit_button:false,
+      enable_submit_button: false,
     }
   }
 
@@ -55,7 +54,7 @@ class Register extends Component {
     console.log(JSON.stringify(this.state))
   }
 
-  onTickTermsConditions(e){
+  onTickTermsConditions(e) {
     console.log(e.target.value);
     this.setState({
       enable_submit_button: true
@@ -65,6 +64,15 @@ class Register extends Component {
   onSubmitRegisterForm(e) {
     const loginUrl = Env.getURL("/api/v1.0/register");
     e.preventDefault();
+
+    const { password } = this.state;
+    const re = new RegExp("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$");
+    const isOk = re.test(password);
+    if (!isOk) {
+      alert("The password is not strong enough.");
+      return
+    }
+
     axios.post(loginUrl, {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -243,11 +251,13 @@ class Register extends Component {
                       />
                     </InputGroup>
                     <FormGroup check>
-                      <Input type="checkbox" name="termsConditions" id="termsConditions"  onChange={e => this.onTickTermsConditions(e)}/>
+                      <Input type="checkbox" name="termsConditions" id="termsConditions"
+                             onChange={e => this.onTickTermsConditions(e)}/>
                       <p>I accept <a href="/terms-conditions">terms and conditions</a></p>
                     </FormGroup>
                     <br/>
-                    <Button disabled={!this.state.enable_submit_button} color="dark" className="header-text" block>Create Account</Button>
+                    <Button disabled={!this.state.enable_submit_button} color="dark" className="header-text" block>Create
+                      Account</Button>
                   </Form>
                 </CardBody>
               </Card>

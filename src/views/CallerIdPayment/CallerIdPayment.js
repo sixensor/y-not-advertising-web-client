@@ -9,9 +9,10 @@ import FormGroup from "reactstrap/es/FormGroup";
 import Input from "reactstrap/lib/Input";
 import Label from "reactstrap/es/Label";
 import Button from "reactstrap/lib/Button";
-import Env from "../../Env/env";
+import Env from "../Env/env";
 
-class CampaignPayment extends Component {
+
+class CallerIdPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,26 +38,62 @@ class CampaignPayment extends Component {
     }
   }
 
+
+// {
+//   "id": 1,
+//   "transaction_id": 57,
+//   "first_name": "Chamith Udayanga",
+//   "last_name": "",
+//   "phone": "94762278118",
+//   "email": "udayangaac2@gmail.com",
+//   "description": "Activation payment for Caller ID `BizBromo`.",
+//   "address_line_one": "1st Lane, Katugahawaththa",
+//   "address_line_two": "Dombagoda",
+//   "city": "Horana",
+//   "country": "Sri Lanka",
+//   "total": "3000.00"
+// }
+
   componentDidMount() {
-    let processedData = JSON.parse(localStorage.getItem('CampaignProcessedData'));
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    let processedData = JSON.parse(localStorage.getItem('CallerIdProcessedData'));
     // console.log(processedData)
+
+
+    // {
+    //   "id":1,
+    //   "transaction_id":80,
+    //   "first_name":"Chamith Udayanga",
+    //   "last_name":"",
+    //   "phone":"94762278118",
+    //   "email":"udayangaac2@gmail.com",
+    //   "description":"Activation payment for Caller ID `YNot`.",
+    //   "address_line_one":"1st Lane, Katugahawaththa",
+    //   "address_line_two":"Dombagoda",
+    //   "city":"Horana",
+    //   "country":"Sri Lanka",
+    //   "total":"3000.00"
+    // }
     this.setState({
-      message_request_id: processedData.message_request_id,
       transaction_id: processedData.transaction_id,
       description: processedData.description,
-      currency: processedData.currency,
-      items: processedData.items,
+      currency: "LKR",
+      items: undefined,
       total: processedData.total,
-      date: processedData.date,
+      date: today,
       customer: {
-        first_name: processedData.customer.first_name,
-        last_name: processedData.customer.last_name,
-        email: processedData.customer.email,
-        phone_number: processedData.customer.phone_number,
-        address_line_one: processedData.customer.address_line_one,
-        address_line_two: processedData.customer.address_line_two,
-        city: processedData.customer.city,
-        country: processedData.customer.country,
+        first_name: processedData.first_name,
+        last_name: processedData.last_name,
+        email: processedData.email,
+        phone_number: processedData.phone,
+        address_line_one: processedData.address_line_one,
+        address_line_two: processedData.address_line_two,
+        city: processedData.city,
+        country: processedData.country,
       }
     })
   }
@@ -93,7 +130,7 @@ class CampaignPayment extends Component {
                 src="https://www.payhere.lk/downloads/images/payhere_long_banner.png" alt="PayHere"
                 className="img-fluid"/></a>
               <Form method="post" action="https://sandbox.payhere.lk/pay/checkout">
-              {/*<Form onSubmit={e => this.test(e)}>*/}
+                {/*<Form onSubmit={e => this.test(e)}>*/}
                 {/*Hidden variables*/}
                 <FormGroup>
                   <Input type="hidden" name="merchant_id" value="1213806"/>
@@ -102,28 +139,28 @@ class CampaignPayment extends Component {
                   <Input type="hidden" name="notify_url" value={Env.getURL("/api/v1.0/payhere/notify")}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="return_url" value={Env.redirectTo("/campaign/history")}/>
+                  <Input type="hidden" name="return_url" value={Env.redirectTo("/campaign/create")}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="cancel_url" value={Env.redirectTo("/campaign/history#")}/>
+                  <Input type="hidden" name="cancel_url" value={Env.redirectTo("/campaign/create#")}/>
                 </FormGroup>
                 <FormGroup>
                   <Input type="hidden" name="custom_1" value={this.state.transaction_id}/>
                 </FormGroup>
                 <FormGroup>
-                  <Input type="hidden" name="custom_2" value={this.state.message_request_id}/>
+                  {/*<Input type="hidden" name="custom_2" value={this.state.message_request_id}/>*/}
                 </FormGroup>
 
                 {/*Visible variables*/}
                 <Row>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="order_id">Campaign Id</Label>
-                      <Input type="text" id="order_id"
-                             name="order_id" value={this.state.message_request_id} readonly="readonly" />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
+                  {/*<Col md={6}>*/}
+                  {/*  <FormGroup>*/}
+                  {/*    <Label for="order_id">Campaign Id</Label>*/}
+                  {/*    <Input type="text" id="order_id"*/}
+                  {/*           name="order_id" value={this.state.message_request_id} readonly="readonly"/>*/}
+                  {/*  </FormGroup>*/}
+                  {/*</Col>*/}
+                  <Col md={12}>
                     <FormGroup>
                       <Label for="items">Description</Label>
                       <Input type="text" id="items"
@@ -134,21 +171,21 @@ class CampaignPayment extends Component {
                 <FormGroup>
                   <Label for="currency">Currency</Label>
                   <Input type="text" id="currency"
-                         name="currency" value={this.state.currency} readonly="readonly" />
+                         name="currency" value={this.state.currency} readonly="readonly"/>
                 </FormGroup>
                 <Row>
                   <Col md={6}>
                     <FormGroup>
                       <Label for="first_name">First Name</Label>
                       <Input type="text" id="first_name"
-                             name="first_name" value={this.state.customer.first_name} readonly="readonly" />
+                             name="first_name" value={this.state.customer.first_name} readonly="readonly"/>
                     </FormGroup>
                   </Col>
                   <Col md={6}>
                     <FormGroup>
                       <Label for="last_name">Last Name</Label>
                       <Input type="text" id="last_name"
-                             name="last_name" value={this.state.customer.last_name} readonly="readonly" />
+                             name="last_name" value={this.state.customer.last_name} readonly="readonly"/>
                     </FormGroup>
                   </Col>
                 </Row>
@@ -157,36 +194,37 @@ class CampaignPayment extends Component {
                     <FormGroup>
                       <Label for="email">E-mail</Label>
                       <Input type="text" id="email"
-                             name="email" value={this.state.customer.email} readonly="readonly" />
+                             name="email" value={this.state.customer.email} readonly="readonly"/>
                     </FormGroup>
                   </Col>
                   <Col md={6}>
                     <FormGroup>
                       <Label for="phone">Phone</Label>
                       <Input type="text" id="phone"
-                             name="phone" value={this.state.customer.phone_number} readonly="readonly" />
+                             name="phone" value={this.state.customer.phone_number} readonly="readonly"/>
                     </FormGroup>
                   </Col>
                 </Row>
                 <FormGroup>
                   <Label for="address">Address</Label>
                   <Input type="text" id="address" name="address"
-                         value={this.state.customer.address_line_one + ',' + this.state.customer.address_line_two} readonly="readonly" />
+                         value={this.state.customer.address_line_one + ',' + this.state.customer.address_line_two}
+                         readonly="readonly"/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="city">City</Label>
                   <Input type="text" id="city"
-                         name="city" value={this.state.customer.city} readonly="readonly" />
+                         name="city" value={this.state.customer.city} readonly="readonly"/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="country">Country</Label>
                   <Input type="text" id="country"
-                         name="country" value={this.state.customer.country} readonly="readonly" />
+                         name="country" value={this.state.customer.country} readonly="readonly"/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="amount">Total Amount</Label>
                   <Input type="text" id="amount"
-                         name="amount" value={this.state.total} readonly="readonly" />
+                         name="amount" value={this.state.total} readonly="readonly"/>
                 </FormGroup>
                 <Button type="submit" className="primary">Pay Now</Button>
               </Form>
@@ -198,6 +236,6 @@ class CampaignPayment extends Component {
   }
 }
 
-export default CampaignPayment;
+export default CallerIdPayment;
 
 

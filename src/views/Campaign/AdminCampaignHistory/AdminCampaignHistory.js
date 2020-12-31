@@ -76,7 +76,7 @@ class AdminCampaignHistory extends Component {
         }
       }).then(resp => {
       let campaigns = resp.data.map(x => x);
-      console.log(campaigns.length)
+      console.log(campaigns.length);
       if (campaigns.length === 0) {
         this.setState({
           campaigns: campaigns,

@@ -47,10 +47,20 @@ class DefaultLayout extends Component {
     this.props.history.push('/profile')
   }
 
+  processRegPayment(e) {
+    e.preventDefault();
+    this.props.history.push('/register/pay')
+  }
+
+  processCallerIdPayment(e) {
+    e.preventDefault();
+    this.props.history.push('/caller-id/pay')
+  }
+
 
   renderLandingPage() {
     let session = JSON.parse(localStorage.getItem('Session'));
-    console.log(session)
+    console.log(session);
     if (session === null){
       return (<Redirect from="/" to="/home"/>)
     }
@@ -70,7 +80,11 @@ class DefaultLayout extends Component {
         <meta http-equiv="Expires" content="-1" />
         <AppHeader fixed>
           <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} openProfile={e => this.profile(e)}/>
+            <DefaultHeader onLogout={e => this.signOut(e)}
+                           openProfile={e => this.profile(e)}
+                           processRegPayment={e=>this.processRegPayment(e)}
+                           processCallerIDPayment={e=>this.processCallerIdPayment(e)}
+            />
           </Suspense>
         </AppHeader>
         <div className="app-body">

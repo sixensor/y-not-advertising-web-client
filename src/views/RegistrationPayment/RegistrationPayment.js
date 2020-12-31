@@ -9,9 +9,11 @@ import FormGroup from "reactstrap/es/FormGroup";
 import Input from "reactstrap/lib/Input";
 import Label from "reactstrap/es/Label";
 import Button from "reactstrap/lib/Button";
-import Env from "../../Env/env";
+import Env from "../Env/env";
 
-class CampaignPayment extends Component {
+
+
+class RegistrationPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,26 +39,41 @@ class CampaignPayment extends Component {
     }
   }
 
+
+// {
+//   "id": 1,
+//   "transaction_id": 58,
+//   "first_name": "Chamith Udayanga",
+//   "last_name": "",
+//   "phone": "94762278118",
+//   "email": "udayangaac2@gmail.com",
+//   "description": "Payment for user registration.",
+//   "address_line_one": "1st Lane, Katugahawaththa",
+//   "address_line_two": "Dombagoda",
+//   "city": "Horana",
+//   "country": "Sri Lanka",
+//   "total": "4500.00"
+// }
+
   componentDidMount() {
-    let processedData = JSON.parse(localStorage.getItem('CampaignProcessedData'));
+    let processedData = JSON.parse(localStorage.getItem('RegistrationPayment'));
     // console.log(processedData)
     this.setState({
-      message_request_id: processedData.message_request_id,
       transaction_id: processedData.transaction_id,
       description: processedData.description,
-      currency: processedData.currency,
-      items: processedData.items,
+      currency: "LKR",
+      items: undefined,
       total: processedData.total,
       date: processedData.date,
       customer: {
-        first_name: processedData.customer.first_name,
-        last_name: processedData.customer.last_name,
-        email: processedData.customer.email,
-        phone_number: processedData.customer.phone_number,
-        address_line_one: processedData.customer.address_line_one,
-        address_line_two: processedData.customer.address_line_two,
-        city: processedData.customer.city,
-        country: processedData.customer.country,
+        first_name: processedData.first_name,
+        last_name: processedData.last_name,
+        email: processedData.email,
+        phone_number: processedData.phone,
+        address_line_one: processedData.address_line_one,
+        address_line_two: processedData.address_line_two,
+        city: processedData.city,
+        country: processedData.country,
       }
     })
   }
@@ -116,14 +133,7 @@ class CampaignPayment extends Component {
 
                 {/*Visible variables*/}
                 <Row>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="order_id">Campaign Id</Label>
-                      <Input type="text" id="order_id"
-                             name="order_id" value={this.state.message_request_id} readonly="readonly" />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
+                  <Col md={12}>
                     <FormGroup>
                       <Label for="items">Description</Label>
                       <Input type="text" id="items"
@@ -198,6 +208,6 @@ class CampaignPayment extends Component {
   }
 }
 
-export default CampaignPayment;
+export default RegistrationPayment;
 
 
